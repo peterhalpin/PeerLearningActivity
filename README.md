@@ -1,4 +1,3 @@
-TogetherJS Feature
-1. Header
-2. Progress control
-3. integration with Together JS
+# Peer Learning Activity 
+
+Develop by Caroline Parslow, Xinzhao Li, Larry Li for Dr. Peter Halpin at UNC-Chapel Hill.
