@@ -4,6 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css';
+import {renderData, getData} from './utils/data.js'
+console.log('1');
+let dataRendered = getData();
+console.log('2');
+
+while (!dataRendered){
+  console.log('3');
+
+  //show spinner
+}
+console.log('4');
+console.log(dataRendered);
+console.log(getData());
 
 ReactDOM.render(
   <React.StrictMode>
