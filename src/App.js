@@ -12,10 +12,12 @@ function App() {
       <HelpButton />
       <Container>
         <Map/>
-        <RadioButtonPanel ref={(pageComponent) => {window.pageComponent = pageComponent}}/>
+        <RadioButtonPanel ref={(pageComponent) => {window.radioButtonComponent = pageComponent}}/>
       </Container>
     </React.Fragment>
   );
 }
+
+setTimeout(function(){console.log(window.radioButtonComponent.getCheckedButton()) }, 3000);
 
 export default App;

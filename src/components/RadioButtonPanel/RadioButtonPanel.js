@@ -40,14 +40,14 @@ class RadioButtonPanel extends React.Component {
         this.setState({checkedButton: event.target.value});
     }
     
-    // call window.pageComponent.getCheckedButton() to get the checked button
+    // call window.pageComponent.getCheckedButton() to get the checked button or:: window.radioButtonComponent.getCheckedButton()
     getCheckedButton(){
         return this.state.checkedButton;
     }
 
     render() {
         return(
-            <div ref={(childComponent) => {window.childComponent = childComponent}} className="ui raised segment compact radioPanel">
+            <div ref={(childComponent) => {window.radioButtonComponent = childComponent}} className="ui raised segment compact radioPanel">
                 <div className="ui form">
                     <div className="grouped fields">
                         {RadioButton(this.headings, this.state.checkedButton, this.handleChange)}
