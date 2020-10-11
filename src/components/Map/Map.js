@@ -7,7 +7,7 @@ import { layerColors } from './layerColors.js';
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
-const enumDataLayerType = {
+export const enumDataLayerType = {
   ACTIVES: {
     name:'actives',
     layerId: 'states-active-layer'
@@ -48,8 +48,9 @@ class Map extends React.Component {
     this.onClickCallback = null;
   }
 
-  initDataLayer(dataId, layerId, layerType, visible) { 
-    const layerColor = layerColors[layerType];
+  initDataLayer(dataId, layerType, visible) { 
+    const layerId = layerType.layerId;
+    const layerColor = layerColors[layerType.name];
 
     // fill states with different colors based on their corresponding data in geojson file
     // fill states with different opacity based on whether the mouse is hovering or not
@@ -179,9 +180,9 @@ class Map extends React.Component {
         data: statesData 
       })
 
-      this.initDataLayer(dataId, enumDataLayerType.ACTIVES.layerId, enumDataLayerType.ACTIVES.name, false); 
-      this.initDataLayer(dataId, enumDataLayerType.DEATHS.layerId, enumDataLayerType.DEATHS.name, false); 
-      this.initDataLayer(dataId, enumDataLayerType.TESTS.layerId, enumDataLayerType.TESTS.name, false); 
+      this.initDataLayer(dataId, enumDataLayerType.ACTIVES, false); 
+      this.initDataLayer(dataId, enumDataLayerType.DEATHS, false); 
+      this.initDataLayer(dataId, enumDataLayerType.TESTS, false); 
       this.switchToLayer(enumDataLayerType.DEATHS);
       // add dashed-line borders to states
       this.map.addLayer({
