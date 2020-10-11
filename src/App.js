@@ -3,6 +3,7 @@ import './App.css';
 import { Container } from 'semantic-ui-react';
 import Map from './components/Map/Map.js';
 import HelpButton from './components/help/HelpButton.js';
+import Slider from './components/Slider/Slider.js';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <HelpButton />
       <Container>
         <Map/>
+        <Slider />
       </Container>
     </React.Fragment>
   );
