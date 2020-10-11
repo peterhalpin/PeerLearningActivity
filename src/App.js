@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Container } from 'semantic-ui-react';
-import Map from './component/map/Map.js';
-import RadioButtonPanel from './component/dataPanel/RadioButtonPanel'
-import { getHeadings } from './utils/data';
-
+import Map from './components/Map/Map.js';
+import HelpButton from './components/help/HelpButton.js';
 
 function App() {
   
 let headings = [];
 headings = getHeadings(); 
-// setTimeout(function(headings){
 
   return (
-    <Container>
-      {/* <RadioButtonPanel headings={headings}/> */}
-
-      <Map/>
-    </Container>
+    <React.Fragment>
+      <HelpButton />
+      <Container>
+        <Map/>
+      </Container>
+    </React.Fragment>
   );
-// }, 1000);
 }
 
 export default App;
