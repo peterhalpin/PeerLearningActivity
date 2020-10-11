@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import './Map.css';
 import { statesData } from './us-states.js';
 import { MAPBOX_TOKEN } from './tokens.js';
+import { layerColors } from './layerColors.js';
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
@@ -22,29 +23,21 @@ class Map extends React.Component {
       [-177.791110603, 15.91619], // Southwest coordinates
       [-60.96466, 75.3577635769] // Northeast coordinates
     ];
+    this.initDataLayer = this.initDataLayer.bind(this);
   }
 
-  componentDidMount() {
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom,
-      maxBounds: this.bounds
-    });
-
-    map.on('load', () => {
+  initDataLayer(map, dataId, dataSource, layerId, layerColor) {
       // attach geojson data to the map
-      map.addSource('states-data', {
+      map.addSource(dataId, {
         type: 'geojson',
-        data: statesData 
+        data: dataSource 
       })
 
       // fill states with different colors based on their corresponding data in geojson file
       // fill states with different opacity based on whether the mouse is hovering or not
       map.addLayer({
-        id: 'states-fill',
-        source: 'states-data',
+        id: layerId,
+        source: dataId,
         type: 'fill',
         paint: {
           'fill-color': [
@@ -52,21 +45,21 @@ class Map extends React.Component {
             ['linear'],
             ['get', 'density'],
             0,
-            '#F2F12D',
+            layerColor['0'],
             10,
-            '#EED322',
+            layerColor['10'],
             20,
-            '#E6B71E',
+            layerColor['20'],
             50,
-            '#DA9C20',
+            layerColor['50'],
             100,
-            '#CA8323',
+            layerColor['100'],
             200,
-            '#B86B25',
+            layerColor['200'],
             500,
-            '#A25626',
+            layerColor['500'],
             1000,
-            '#8B4225',
+            layerColor['1000'],
           ],
           'fill-opacity': [
             'case',
@@ -78,21 +71,9 @@ class Map extends React.Component {
 
       });
 
-      // add dashed-line borders to states
-      map.addLayer({
-        id: 'states-borders',
-        type: 'line',
-        source: 'states-data',
-        layout: {},
-        paint: {
-          'line-color': '#FFFFFF',
-          'line-width': 2,
-          'line-dasharray': [3, 3]
-        }
-      });
 
       // when hovering, turn on the hover state for current map feature and turn off the hover state for previous map feature (if any)
-      map.on('mousemove', 'states-fill', function(e) {
+      map.on('mousemove', layerId, function(e) {
         if (e.features.length > 0) {
           if (this.hoveredStateId) {
             map.setFeatureState(
@@ -109,7 +90,7 @@ class Map extends React.Component {
       });
 
       // when mouse leaveing the states map, turn off the hover state for current map feature
-      map.on('mouseleave', 'state-fills', function () {
+      map.on('mouseleave', layerId, function () {
         if (this.hoveredStateId) {
           map.setFeatureState(
             { source: 'states', id: this.hoveredStateId },
@@ -117,6 +98,32 @@ class Map extends React.Component {
           );
         }
         this.hoveredStateId = null;
+      });
+
+  }
+
+  componentDidMount() {
+    const map = new mapboxgl.Map({
+      container: this.mapContainer,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [this.state.lng, this.state.lat],
+      zoom: this.state.zoom,
+      maxBounds: this.bounds
+    });
+
+    map.on('load', () => {
+      this.initDataLayer(map, 'states-data', statesData, 'states-fill', layerColors.ACTIVES); 
+      // add dashed-line borders to states
+      map.addLayer({
+        id: 'states-borders',
+        type: 'line',
+        source: 'states-data',
+        layout: {},
+        paint: {
+          'line-color': '#FFFFFF',
+          'line-width': 2,
+          'line-dasharray': [3, 3]
+        }
       });
     });
 
