@@ -4,6 +4,7 @@ import { Container } from 'semantic-ui-react';
 import Map from './components/Map/Map.js';
 import HelpButton from './components/help/HelpButton.js';
 import RadioButtonPanel from './components/RadioButtonPanel/RadioButtonPanel.js';
+import Slider from './components/Slider/Slider.js';
 
 function App() {
   
@@ -13,6 +14,7 @@ function App() {
       <Container>
         <Map/>
         <RadioButtonPanel ref={(pageComponent) => {window.radioButtonComponent = pageComponent}}/>
+        <Slider />
       </Container>
     </React.Fragment>
   );
