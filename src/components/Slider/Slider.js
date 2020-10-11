@@ -13,6 +13,7 @@ class Slider extends React.Component {
 
   handleChange(event) {
     this.setState({dateValue: event.target.value});
+    this.props.setData('selectedDate', event.target.value);
   }
 
   getDate(){

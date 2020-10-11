@@ -1,0 +1,8 @@
+.dataPanels {
+    z-index: 1;
+    position: absolute;
+    top:0px;
+    width: 150px;
+    left: 20px;
+}
+
