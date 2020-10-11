@@ -18,6 +18,8 @@ class Map extends React.Component {
     };
     // the state that mouse is on right now
     this.hoveredStateId = null;
+    // the state that mouse has selected right now
+    this.selectedStateId = null;
     // restrict user inside this region of the map
     this.bounds = [
       [-177.791110603, 15.91619], // Southwest coordinates
@@ -60,9 +62,15 @@ class Map extends React.Component {
             layerColor['1000'],
           ],
           'fill-opacity': [
+            // if the state is either hovered or selected, highlight the state; otherwise cancel the highlight
             'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            0.75,
+            [
+              'any',
+              ['boolean', ['feature-state', 'hover'], false],
+              ['boolean', ['feature-state', 'select'], false],
+              false
+            ],
+            0.85,
             0.5
           ]
         }
@@ -83,6 +91,23 @@ class Map extends React.Component {
           map.setFeatureState(
             { source: dataId, id: this.hoveredStateId },
             { hover: true }
+          );
+        }
+      });
+
+      // when selecting, turn on the hover state for current map feature and turn off the select state for previous map feature (if any)
+      map.on('click', layerId, function(e) {
+        if (e.features.length > 0) {
+          if (this.selectedStateId) {
+            map.setFeatureState(
+              { source: dataId, id: this.selectedStateId },
+              { select: false }
+            );
+          }
+          this.selectedStateId = e.features[0].id;
+          map.setFeatureState(
+            { source: dataId, id: this.selectedStateId },
+            { select: true }
           );
         }
       });
