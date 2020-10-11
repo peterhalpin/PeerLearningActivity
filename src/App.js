@@ -2,8 +2,7 @@ import React from 'react';
 import './App.css';
 import { Container } from 'semantic-ui-react';
 import Map from './components/Map/Map.js';
-import HelpButton from './component/help/HelpButton.js';
-import TogetherButton from './components/TogetherButton/TogetherButton';
+import HelpButton from './components/help/HelpButton.js';
 
 function App() {
   return (
