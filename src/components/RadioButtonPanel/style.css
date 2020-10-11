@@ -1,0 +1,6 @@
+.radioPanel{
+    z-index: 1;
+    position:absolute;
+    left: 30px;
+    top: 150px;
+}

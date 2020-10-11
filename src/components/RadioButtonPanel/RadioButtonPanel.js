@@ -1,9 +1,5 @@
 import React from 'react';
-// import * as d3 from 'd3';
-import {getHeadings} from '../../utils/data.js';
 import './style.css';
-
-
 
 function RadioButton(headings, checkedButton, handleChange) {
     let nameCount = -1;
@@ -21,15 +17,14 @@ function RadioButton(headings, checkedButton, handleChange) {
     return(
         labels
     )
-    
 }
-
 
 class RadioButtonPanel extends React.Component {
 
     constructor(props) {
         super(props);
-        this.headings = getHeadings();
+        //TODO: Get headings from data.js in the future
+        this.headings = ['heading 1', 'heading 2', 'heading 3'];
         this.state={
             checkedButton: this.headings[0]
         }
