@@ -1,5 +1,5 @@
 export const layerColors = {
-  ACTIVES : {
+  'actives' : {
       0: '#F2F12D',
       10: '#EED322',
       20: '#E6B71E',
@@ -9,7 +9,7 @@ export const layerColors = {
       500: '#A25626',
       1000: '#8B4225'
   },
-  DEATHS : {
+  'deaths' : {
       0: '#FFEDA0',
       10: '#FED976',
       20: '#FEB24C',
@@ -19,7 +19,7 @@ export const layerColors = {
       500: '#BD0026',
       1000: '#800026'
   },
-  TESTS : {
+  'tests' : {
       0: '#2df2f2',
       10: '#22daee',
       20: '#1ec1e6',
