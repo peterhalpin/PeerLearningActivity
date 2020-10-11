@@ -26,12 +26,7 @@ class Map extends React.Component {
     this.initDataLayer = this.initDataLayer.bind(this);
   }
 
-  initDataLayer(map, dataId, dataSource, layerId, layerColor) {
-      // attach geojson data to the map
-      map.addSource(dataId, {
-        type: 'geojson',
-        data: dataSource 
-      })
+  initDataLayer(map, dataId, layerId, layerColor, visible) { 
 
       // fill states with different colors based on their corresponding data in geojson file
       // fill states with different opacity based on whether the mouse is hovering or not
@@ -39,6 +34,9 @@ class Map extends React.Component {
         id: layerId,
         source: dataId,
         type: 'fill',
+        layout: {
+          'visibility': (visible ? 'visible' : 'none')
+        },
         paint: {
           'fill-color': [
             'interpolate',
@@ -77,13 +75,13 @@ class Map extends React.Component {
         if (e.features.length > 0) {
           if (this.hoveredStateId) {
             map.setFeatureState(
-              { source: 'states-data', id: this.hoveredStateId },
+              { source: dataId, id: this.hoveredStateId },
               { hover: false }
             );
           }
           this.hoveredStateId = e.features[0].id;
           map.setFeatureState(
-            { source: 'states-data', id: this.hoveredStateId },
+            { source: dataId, id: this.hoveredStateId },
             { hover: true }
           );
         }
@@ -93,7 +91,7 @@ class Map extends React.Component {
       map.on('mouseleave', layerId, function () {
         if (this.hoveredStateId) {
           map.setFeatureState(
-            { source: 'states', id: this.hoveredStateId },
+            { source: dataId, id: this.hoveredStateId },
             { hover: false }
           );
         }
@@ -112,12 +110,21 @@ class Map extends React.Component {
     });
 
     map.on('load', () => {
-      this.initDataLayer(map, 'states-data', statesData, 'states-fill', layerColors.ACTIVES); 
+      const dataId = 'states-data';
+      // attach geojson data to the map
+      map.addSource(dataId, {
+        type: 'geojson',
+        data: statesData 
+      })
+
+      this.initDataLayer(map, dataId, 'states-active-layer', layerColors.ACTIVES, false); 
+      this.initDataLayer(map, dataId, 'states-death-layer', layerColors.DEATHS, true); 
+      this.initDataLayer(map, dataId, 'states-test-layer', layerColors.TESTS, false); 
       // add dashed-line borders to states
       map.addLayer({
         id: 'states-borders',
         type: 'line',
-        source: 'states-data',
+        source: dataId,
         layout: {},
         paint: {
           'line-color': '#FFFFFF',
