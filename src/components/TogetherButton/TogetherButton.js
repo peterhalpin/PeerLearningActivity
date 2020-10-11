@@ -13,14 +13,10 @@ class TogetherButton extends React.Component {
 
 ToggleButton(){
   if (this.state.togetherON) {
-    this.setState((currentState) => ({
-      togetherON: !currentState.togetherON,
-    }));
+    this.state.togetherON = false;
     this.state.text = 'Start Collaborating';
   } else {
-    this.setState((currentState) => ({
-      togetherON: !currentState.togetherON,
-    }));
+    this.state.togetherON = true;
     this.state.text = 'Done Collaborating';
   }
 
