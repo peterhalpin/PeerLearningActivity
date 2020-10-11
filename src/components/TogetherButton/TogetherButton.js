@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './TogetherButton.module.css';
+import './TogetherButton.css';
 
 class TogetherButton extends React.Component {
   constructor(props){
@@ -31,7 +31,7 @@ ToggleButton(){
 render(){
     return(
         <div>
-          <button className="TogetherJSButton" onClick={ () => this.ToggleButton() }>
+          <button className="ui button TogetherButton" onClick={ () => this.ToggleButton() }>
             {this.state.text}
           </button>
         </div>
