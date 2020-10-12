@@ -7,30 +7,22 @@ class TogetherButton extends React.Component {
     super(props);
     this.state={
       togetherON: false,
-      text: 'Start Collaborating'
     }
-}
-
-ToggleButton(){
-  if (this.state.togetherON) {
-    this.state.togetherON = false;
-    this.state.text = 'Start Collaborating';
-  } else {
-    this.state.togetherON = true;
-    this.state.text = 'Done Collaborating';
   }
 
-  window.TogetherJS(this);
-  return false;
-}
+  ToggleButton(){
+    this.state.togetherON = !this.state.togetherON;
+    window.TogetherJS(this);
+    return false;
+  }
 
-render(){
+  render(){
     return(
-        <div>
-          <button className="ui button TogetherButton" onClick={ () => this.ToggleButton() }>
-            {this.state.text}
-          </button>
-        </div>
+      <div>
+        <button className="ui button TogetherButton" onClick={ () => this.ToggleButton() }>
+          <i className="handshake icon"></i>
+        </button>
+      </div>
     )
   }
 }
