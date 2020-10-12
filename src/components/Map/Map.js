@@ -38,14 +38,12 @@ class Map extends React.Component {
     this.selectedStateId = null;
     // restrict user inside this region of the map
     this.bounds = [
-      [-177.791110603, 15.91619], // Southwest coordinates
-      [-60.96466, 75.3577635769] // Northeast coordinates
+      [-179, -5.91619], // Southwest coordinates
+      [-20.96466, 75.3577635769] // Northeast coordinates
     ];
     this.initDataLayer = this.initDataLayer.bind(this);
     this.switchToLayer = this.switchToLayer.bind(this);
     this.currentDataLayer = null;
-    // set this to bind your custom function with map clicking action
-    this.onClickCallback = null;
   }
 
   initDataLayer(dataId, layerType, visible) { 
@@ -132,8 +130,8 @@ class Map extends React.Component {
           { select: true }
         );
 
-        if (this.onClickCallback) {
-          this.onClickCallback(this.selectedStateId);
+        if (this.props.onClickCallback) {
+          this.props.onClickCallback(this.selectedStateId);
         }
       }
     });
