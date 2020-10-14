@@ -151,7 +151,6 @@ class Map extends React.Component {
 
   switchToLayer(layerType) {
     for (const type in enumDataLayerType) {
-      console.log(enumDataLayerType[type]);
       if (enumDataLayerType[type] === layerType) {
         this.currentDataLayer = enumDataLayerType[type];
         this.map.setLayoutProperty(enumDataLayerType[type].layerId, 'visibility', 'visible');
