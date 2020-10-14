@@ -4,6 +4,7 @@ import { Container } from 'semantic-ui-react';
 import Map from './components/Map/Map.js';
 import HelpButton from './components/help/HelpButton.js';
 import TogetherButton from './components/TogetherButton/TogetherButton.js';
+import { onClickMap } from './map-example.js'; // TODO: replace with export functions from custom components
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <HelpButton />
       <Container>
         <TogetherButton/>
-        <Map/>
+        <Map onClickCallback={onClickMap}/>
       </Container>
     </React.Fragment>
   );
