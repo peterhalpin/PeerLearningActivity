@@ -8,6 +8,8 @@ import Slider from './components/Slider/Slider.js';
 import QAPanel from './components/QAPanel/QAPanel.js';
 import DataDisplay from './components/DataDisplay/DataDisplay.js';
 import DataPanels from './components/dataPanels/dataPanels.js';
+import TogetherButton from './components/TogetherButton/TogetherButton.js';
+import { onClickMap } from './map-example.js'; // TODO: replace with export functions from custom components
 
 function App() {
   
@@ -15,17 +17,12 @@ function App() {
     <React.Fragment>
       <HelpButton />
       <Container>
-        <Map/>
         <DataPanels/>
-        {/* <RadioButtonPanel ref={(pageComponent) => {window.radioButtonComponent = pageComponent}}/>
-        <Slider />
-        <DataDisplay/>
-        <QAPanel/> */}
+        <TogetherButton/>
+        <Map onClickCallback={onClickMap}/>
       </Container>
     </React.Fragment>
   );
 }
-
-// setTimeout(function(){console.log(window.radioButtonComponent.getCheckedButton()) }, 3000);
 
 export default App;

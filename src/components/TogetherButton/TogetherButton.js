@@ -1,12 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './TogetherButton.module.css';
+import './TogetherButton.css';
 
-const TogetherButton = () => (
-  <div className={styles.TogetherButton} data-testid="TogetherButton">
-    TogetherButton Component
-  </div>
-);
+class TogetherButton extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      togetherON: false,
+    }
+  }
+
+  ToggleButton(){
+    this.state.togetherON = !this.state.togetherON;
+    window.TogetherJS(this);
+    return false;
+  }
+
+  render(){
+    return(
+      <div>
+        <button className="ui button TogetherButton" onClick={ () => this.ToggleButton() }>
+          <i className="handshake icon"></i>
+        </button>
+      </div>
+    )
+  }
+}
 
 TogetherButton.propTypes = {};
 
