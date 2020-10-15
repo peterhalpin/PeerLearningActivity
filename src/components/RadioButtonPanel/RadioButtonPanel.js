@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import {getDefaultHeading, getStyledHeadings} from '../../utils/data.js';
 
 function RadioButton(headings, checkedButton, handleChange) {
     let nameCount = -1;
@@ -9,7 +10,7 @@ function RadioButton(headings, checkedButton, handleChange) {
         <div className="field" key = {nameCount}>
             <div className="ui radio checkbox">
                 <input type="radio" name={'button' + nameCount} value={currHeading} checked={checkedButton === currHeading} onChange={handleChange} />
-                <label>{currHeading}</label>
+                <label><p className='capitalize'>{currHeading}</p></label>
             </div>
         </div>
             )
@@ -23,17 +24,15 @@ class RadioButtonPanel extends React.Component {
 
     constructor(props) {
         super(props);
-        //TODO: Get headings from data.js in the future
-        this.headings = ['heading 1', 'heading 2', 'heading 3'];
+        this.headings = getStyledHeadings();
         this.state={
-            checkedButton: this.headings[0]
+            checkedButton: getDefaultHeading()
         }
         this.handleChange = this.handleChange.bind(this);
         
     }
 
     handleChange(event){
-        console.log(event.target.value);
         this.setState({checkedButton: event.target.value});
         this.props.setData('selectedDataType', event.target.value);
     }

@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css';
-import {renderData, getData} from './utils/data.js';
+import {renderData} from './utils/data.js';
 
 
 let newPromise = new Promise(function(resolve) {
@@ -12,7 +12,6 @@ let newPromise = new Promise(function(resolve) {
 })
 
 const renderApp = function(){
-  // console.log(getData());
   ReactDOM.render(
     <React.StrictMode>
       <App />
