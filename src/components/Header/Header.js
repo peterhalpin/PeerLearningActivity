@@ -2,14 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Header.css';
 
-const Header = () => (
-  <div className="Header" data-testid="Header">
-    Header Component
-  </div>
-);
+class Header extends React.Component {
 
-Header.propTypes = {};
+  constructor(props) {
+    super(props);
+  }
 
-Header.defaultProps = {};
+  render() {
+
+    return (
+      <div className="ui raised center segment compact Header">
+        <p>It's student xx's turn</p>
+      </div>
+    );
+
+  }
+}
 
 export default Header;
