@@ -21,6 +21,9 @@ class DataPanels extends React.Component {
 
     setData(type, value) {
       this.setState({[type]: [value]});
+      if(type === 'selectedDataType') {
+        this.props.updateLayer(value);
+      }
     }
 
     setSelectState(name) {
