@@ -1,0 +1,14 @@
+.radioPanel{
+    z-index: 1;
+    
+    /* width: 100px; */
+    /* position:relative; */
+    /* left: 30px; */
+    /* top: 160px; */
+    /* width:100%; */
+}
+.capitalize {
+    width: 150px;
+    text-transform: capitalize;
+    overflow-wrap: break-word;
+}

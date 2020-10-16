@@ -1,0 +1,14 @@
+.dataDisplay {
+    z-index: 1;
+    position: absolute;
+    width: 200px;
+    text-align: center;
+}
+.dataDisplayValue{
+    font-size: large;
+    padding-bottom: 15px;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
