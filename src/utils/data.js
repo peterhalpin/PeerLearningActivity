@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 let headings = [];
 let dataObject;
 
-//in the cuture if there are multiple databases we can provide which data to use as a parameter
 export const renderData = async function(){
     await d3.csv("/data/COVID_Data_2020_07_04.csv").then(function(data) {
         dataObject = data;
@@ -10,10 +9,8 @@ export const renderData = async function(){
             return currHeading !== 'id' && currHeading !== 'location' && currHeading !== 'date';
         });
     });
-    console.log('headings',headings);
     return true;
 }
-
 
 export const getHeadings = function(){
     return headings;

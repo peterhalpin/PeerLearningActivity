@@ -8,51 +8,23 @@ import {getDefaultHeading, getHeadings, renderData} from '../../utils/data.js';
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
-// let enumDataLayerType;
-// let newPromise = new Promise(function(resolve) {
-//   resolve(renderData());
-// })
+let enumDataLayerType;
+let newPromise = new Promise(function(resolve) {
+  resolve(renderData());
+})
 
 
-// const setEnum = function(){
-//   console.log(getHeadings());
-//   let dataLayerTypes = {}
-//   let headings = getHeadings();
-//   console.log(headings);
-//   headings.forEach(curr => {
-//       console.log(curr);
-//       const enumValue = curr; //can add .toUpperCase() but I don't think this is enum anymore
-//       dataLayerTypes = {...dataLayerTypes, [enumValue]: {name: curr, layerId: curr}};
-//   });
-  
-  
-//   console.log(dataLayerTypes);
-  
-//   enumDataLayerType = {...dataLayerTypes};
-// }
+const setEnum = function(){
+  let dataLayerTypes = {}
+  let headings = getHeadings();
+  headings.forEach(curr => {
+      const enumValue = curr;
+      dataLayerTypes = {...dataLayerTypes, [enumValue]: {name: curr, layerId: curr}};
+  });
+  enumDataLayerType = {...dataLayerTypes}; //TODO: replace this weith dataLayerTypes everywhere since it's no longer enum
+}
 
-
-// newPromise.then(setEnum);
-
-
-
-
-
-export const enumDataLayerType = {
-  ACTIVES: {
-    name:'actives',
-    layerId: 'states-active-layer'
-  },
-  TESTS: {
-    name:'tests',
-    layerId: 'states-test-layer'
-  },
-  DEATHS: {
-    name:'deaths',
-    layerId: 'states-death-layer'
-  }
-};
-
+newPromise.then(setEnum);
 
 class Map extends React.Component {
 
@@ -80,7 +52,8 @@ class Map extends React.Component {
 
   initDataLayer(dataId, layerType, visible) { 
     const layerId = layerType.layerId;
-    const layerColor = layerColors[layerType.name];
+    const layerColor = layerColors['mapExample'];
+    // const layerColor = layerColors[layerType.name];
 
     // fill states with different colors based on their corresponding data in geojson file
     // fill states with different opacity based on whether the mouse is hovering or not
@@ -182,9 +155,8 @@ class Map extends React.Component {
   }
 
   switchToLayer(layerType) {
-    console.log(layerType);
     for (const type in enumDataLayerType) {
-      if (enumDataLayerType[type] === layerType) {
+      if (enumDataLayerType[type].layerId === layerType) {
         this.currentDataLayer = enumDataLayerType[type];
         this.map.setLayoutProperty(enumDataLayerType[type].layerId, 'visibility', 'visible');
       } else {
@@ -210,31 +182,10 @@ class Map extends React.Component {
         data: statesData 
       })
 
-
-
-
-
-
-      this.initDataLayer(dataId, enumDataLayerType.ACTIVES, false); 
-      this.initDataLayer(dataId, enumDataLayerType.DEATHS, false); 
-      this.initDataLayer(dataId, enumDataLayerType.TESTS, false); 
-      this.switchToLayer(enumDataLayerType.DEATHS);
-         
-      
-      
-      
-      // console.log(enumDataLayerType);
-
-      // Object.keys(enumDataLayerType).forEach(curr => {
-      //   console.log(enumDataLayerType[curr]);
-      //   this.initDataLayer(dataId, enumDataLayerType[curr], false);
-      // })
-      
-      // this.switchToLayer(getDefaultHeading());
-      
-      
-      
-      
+      Object.keys(enumDataLayerType).forEach(curr => {
+        this.initDataLayer(dataId, enumDataLayerType[curr], false);
+      })
+      this.switchToLayer(getDefaultHeading());
       
       // add dashed-line borders to states
       this.map.addLayer({

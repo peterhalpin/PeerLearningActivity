@@ -16,7 +16,8 @@ class MapAndDataContainer extends React.Component {
 
   updateLayer(value) {
     this.setState({selectedLayer: [value]});
-    this.child.switchToLayer(value);
+    const destylizedValue = value.replace(' ', '_');
+    this.child.switchToLayer(destylizedValue);
   }
 
   render() {
