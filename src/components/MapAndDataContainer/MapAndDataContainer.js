@@ -9,22 +9,35 @@ class MapAndDataContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedState: 'Alabama',
+      selectedStateData: 20,
       selectedLayer: getDefaultHeading(),
     };
+    this.selectStateWithData = this.selectStateWithData.bind(this);
     this.updateLayer = this.updateLayer.bind(this);
+  }
+
+
+  selectStateWithData(stateName, data) {
+    this.setState({
+      selectedState: [stateName],
+      selectedStateData: [data]
+    });
+    this.childPanel.setSelectState(stateName);
+    this.childPanel.setCurrentData(data);
   }
 
   updateLayer(value) {
     this.setState({selectedLayer: [value]});
     const destylizedValue = value.replace(' ', '_');
-    this.child.switchToLayer(destylizedValue);
+    this.childMap.switchToLayer(destylizedValue);
   }
 
   render() {
     return(
       <Container>
-        <DataPanels updateLayer={this.updateLayer}/>
-        <Map onRef={ref => (this.child = ref)}/>
+        <DataPanels ref={ref => this.childPanel = ref} updateLayer={this.updateLayer}/>
+        <Map ref={ref => (this.childMap = ref)} onClickMap={this.selectStateWithData}/>
       </Container>
     )  
   }

@@ -135,8 +135,8 @@ class Map extends React.Component {
           { select: true }
         );
 
-        if (this.props.onClickCallback) {
-          this.props.onClickCallback(this.selectedStateId);
+        if (this.props.onClickMap) {
+          this.props.onClickMap(e.features[0].properties.name, e.features[0].properties.density);
         }
       }
     });
@@ -205,10 +205,6 @@ class Map extends React.Component {
 
 
   render() {
-
-
-      this.props.onRef(this);
-
     return (
       <div>
         <div ref={el => this.mapContainer = el} className="mapContainer" />
