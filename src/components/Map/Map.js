@@ -130,8 +130,8 @@ class Map extends React.Component {
           { select: true }
         );
 
-        if (this.props.onClickCallback) {
-          this.props.onClickCallback(this.selectedStateId);
+        if (this.props.onClickMap) {
+          this.props.onClickMap(e.features[0].properties.name);
         }
       }
     });

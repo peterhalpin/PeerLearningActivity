@@ -4,6 +4,7 @@ import RadioButtonPanel from '../RadioButtonPanel/RadioButtonPanel.js';
 import Slider from '../Slider/Slider.js';
 import DataDisplay from '../DataDisplay/DataDisplay.js';
 import {getDefaultHeading} from '../../utils/data.js';
+import {statesData} from '../Map/us-states.js';
 
 class DataPanels extends React.Component {
 
@@ -15,10 +16,16 @@ class DataPanels extends React.Component {
             selectedState: 'Alabama'
         }
         this.setData = this.setData.bind(this);
+        this.setSelectState = this.setSelectState.bind(this);
     }
 
     setData(type, value) {
       this.setState({[type]: [value]});
+    }
+
+    setSelectState(name) {
+      this.setData('selectedState', name);
+      console.log(this.state.selectedState);
     }
 
     render() {
