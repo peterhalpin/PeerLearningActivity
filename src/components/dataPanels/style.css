@@ -1,0 +1,9 @@
+.dataPanels {
+    z-index: 1;
+    position: absolute;
+    top: 75px;
+    width:200px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+}
