@@ -3,8 +3,7 @@ import './style.css';
 import RadioButtonPanel from '../RadioButtonPanel/RadioButtonPanel.js';
 import Slider from '../Slider/Slider.js';
 import DataDisplay from '../DataDisplay/DataDisplay.js';
-import {getDefaultHeading} from '../../utils/data.js';
-import {statesData} from '../Map/us-states.js';
+import {getDefaultHeading, getDefaultDateInt} from '../../utils/data.js';
 
 class DataPanels extends React.Component {
 
@@ -12,7 +11,7 @@ class DataPanels extends React.Component {
         super(props);
         this.state={
             selectedDataType: getDefaultHeading(),
-            selectedDate: '14',
+            selectedDate: getDefaultDateInt(),
             selectedState: 'Alabama'
         }
         this.setData = this.setData.bind(this);
