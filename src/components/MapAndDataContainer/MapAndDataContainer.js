@@ -3,18 +3,27 @@ import { Container } from 'semantic-ui-react';
 import './MapAndDataContainer.css';
 import Map from '../Map/Map.js';
 import DataPanels from '../dataPanels/dataPanels.js';
+import {getDefaultHeading} from '../../utils/data.js';
 
 class MapAndDataContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedLayer: getDefaultHeading(),
+    };
+    this.updateLayer = this.updateLayer.bind(this);
+  }
+
+  updateLayer(value) {
+    this.setState({selectedLayer: [value]});
+    this.child.switchToLayer(value);
   }
 
   render() {
     return(
       <Container>
-        <DataPanels/>
-        <Map/>
+        <DataPanels updateLayer={this.updateLayer}/>
+        <Map onRef={ref => (this.child = ref)}/>
       </Container>
     )  
   }

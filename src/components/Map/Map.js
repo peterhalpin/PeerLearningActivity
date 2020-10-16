@@ -4,8 +4,39 @@ import './Map.css';
 import { statesData } from './us-states.js';
 import { MAPBOX_TOKEN } from './tokens.js';
 import { layerColors } from './layerColors.js';
+import {getDefaultHeading, getHeadings, renderData} from '../../utils/data.js';
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
+
+// let enumDataLayerType;
+// let newPromise = new Promise(function(resolve) {
+//   resolve(renderData());
+// })
+
+
+// const setEnum = function(){
+//   console.log(getHeadings());
+//   let dataLayerTypes = {}
+//   let headings = getHeadings();
+//   console.log(headings);
+//   headings.forEach(curr => {
+//       console.log(curr);
+//       const enumValue = curr; //can add .toUpperCase() but I don't think this is enum anymore
+//       dataLayerTypes = {...dataLayerTypes, [enumValue]: {name: curr, layerId: curr}};
+//   });
+  
+  
+//   console.log(dataLayerTypes);
+  
+//   enumDataLayerType = {...dataLayerTypes};
+// }
+
+
+// newPromise.then(setEnum);
+
+
+
+
 
 export const enumDataLayerType = {
   ACTIVES: {
@@ -19,8 +50,9 @@ export const enumDataLayerType = {
   DEATHS: {
     name:'deaths',
     layerId: 'states-death-layer'
-  },
+  }
 };
+
 
 class Map extends React.Component {
 
@@ -150,6 +182,7 @@ class Map extends React.Component {
   }
 
   switchToLayer(layerType) {
+    console.log(layerType);
     for (const type in enumDataLayerType) {
       if (enumDataLayerType[type] === layerType) {
         this.currentDataLayer = enumDataLayerType[type];
@@ -177,10 +210,32 @@ class Map extends React.Component {
         data: statesData 
       })
 
+
+
+
+
+
       this.initDataLayer(dataId, enumDataLayerType.ACTIVES, false); 
       this.initDataLayer(dataId, enumDataLayerType.DEATHS, false); 
       this.initDataLayer(dataId, enumDataLayerType.TESTS, false); 
       this.switchToLayer(enumDataLayerType.DEATHS);
+         
+      
+      
+      
+      // console.log(enumDataLayerType);
+
+      // Object.keys(enumDataLayerType).forEach(curr => {
+      //   console.log(enumDataLayerType[curr]);
+      //   this.initDataLayer(dataId, enumDataLayerType[curr], false);
+      // })
+      
+      // this.switchToLayer(getDefaultHeading());
+      
+      
+      
+      
+      
       // add dashed-line borders to states
       this.map.addLayer({
         id: 'states-borders',
@@ -197,7 +252,12 @@ class Map extends React.Component {
 
   }
 
+
   render() {
+
+
+      this.props.onRef(this);
+
     return (
       <div>
         <div ref={el => this.mapContainer = el} className="mapContainer" />

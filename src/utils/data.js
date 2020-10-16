@@ -10,8 +10,10 @@ export const renderData = async function(){
             return currHeading !== 'id' && currHeading !== 'location' && currHeading !== 'date';
         });
     });
+    console.log('headings',headings);
     return true;
 }
+
 
 export const getHeadings = function(){
     return headings;
