@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './TogetherButton.css';
 
 class TogetherButton extends React.Component {
@@ -11,7 +10,9 @@ class TogetherButton extends React.Component {
   }
 
   ToggleButton(){
-    this.state.togetherON = !this.state.togetherON;
+    this.setState({
+      togetherON: !this.state.togetherON
+    })
     window.TogetherJS(this);
     return false;
   }
