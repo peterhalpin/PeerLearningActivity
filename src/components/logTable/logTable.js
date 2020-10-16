@@ -32,18 +32,20 @@ class LogTable extends React.Component {
 
   render() {
     return(
-      <div className="LogTable ui raised segment compact" data-testid="logTable">
-        <p>Student log</p>
-          <Form >
-            <Form.Input placeholder='put your data log here' onChange={this.handleFormChange}/>
-            <Button onClick={this.handleSubmit}>Submit</Button>
-          </Form>
+      <div className="LogTable" data-testid="logTable">
+        <div className="ui segment raised">
+          <p>Student log</p>
+            <Form >
+              <Form.Input placeholder='put your data log here' onChange={this.handleFormChange}/>
+              <Button onClick={this.handleSubmit}>Submit</Button>
+            </Form>
 
-        <List>
-          {this.state.items.map((item) => (
-            <List.Item>{item}</List.Item>
-          ))}
-        </List>
+          <List>
+            {this.state.items.map((item) => (
+              <List.Item>{item}</List.Item>
+            ))}
+          </List>
+        </div>
       </div>
     )
   }
