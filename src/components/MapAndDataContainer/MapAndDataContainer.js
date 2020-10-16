@@ -21,6 +21,7 @@ class MapAndDataContainer extends React.Component {
       selectedStateData: [data]
     });
     this.childPanel.setSelectState(stateName);
+    this.childPanel.setCurrentData(data);
   }
 
   render() {

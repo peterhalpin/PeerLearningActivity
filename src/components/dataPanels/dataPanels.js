@@ -12,6 +12,7 @@ class DataPanels extends React.Component {
         this.state={
             selectedDataType: getDefaultHeading(),
             selectedDate: getDefaultDateInt(),
+            currentData: 0,
             selectedState: 'Alabama'
         }
         this.setData = this.setData.bind(this);
@@ -27,12 +28,17 @@ class DataPanels extends React.Component {
       console.log(this.state.selectedState);
     }
 
+    setCurrentData(data) {
+      this.setData('currentData', data);
+      console.log(this.state.currentData);
+    }
+
     render() {
         return(
           <div className='dataPanels'>
             <Slider setData={this.setData}/>
             <RadioButtonPanel setData={this.setData}/>
-            <DataDisplay selectedDate={this.state.selectedDate} selectedDataType={this.state.selectedDataType} selectedState={this.state.selectedState}/>
+            <DataDisplay selectedDate={this.state.selectedDate} currentData={this.state.currentData} selectedDataType={this.state.selectedDataType} selectedState={this.state.selectedState}/>
           </div>
 
         )

@@ -7,7 +7,7 @@ class DataDisplay extends React.Component {
         return(
             <div className="ui raised segment compact dataDisplay">
                 <p><span className='capitalize'>{this.props.selectedDataType}</span> in {this.props.selectedState} on {mapIntToDate(this.props.selectedDate)}:</p>
-                <p className='dataDisplayValue'>14</p>
+                <p className='dataDisplayValue'>{this.props.currentData}</p>
             </div>
 
 
