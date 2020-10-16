@@ -15,7 +15,6 @@ function App() {
       <HelpButton />
       <Header />
       <Container>
-        <TogetherButton/>
         <DataPanels/>
         <Map onClickCallback={onClickMap}/>
       </Container>
