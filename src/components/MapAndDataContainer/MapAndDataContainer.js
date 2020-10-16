@@ -9,21 +9,25 @@ class MapAndDataContainer extends React.Component {
     super(props);
     this.state = {
       selectedState: 'Alabama',
+      selectedStateData: 20 
     };
-    this.setSelectState = this.setSelectState.bind(this);
+    this.selectStateWithData = this.selectStateWithData.bind(this);
   }
 
 
-  setSelectState(value) {
-    this.setState({selectedState: [value]});
-    this.childPanel.setSelectState(value);
+  selectStateWithData(stateName, data) {
+    this.setState({
+      selectedState: [stateName],
+      selectedStateData: [data]
+    });
+    this.childPanel.setSelectState(stateName);
   }
 
   render() {
     return(
       <Container>
         <DataPanels ref={ref => this.childPanel = ref}/>
-        <Map onClickMap={this.setSelectState}/>
+        <Map onClickMap={this.selectStateWithData}/>
       </Container>
     )  
   }

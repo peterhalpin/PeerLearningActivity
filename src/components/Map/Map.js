@@ -131,7 +131,7 @@ class Map extends React.Component {
         );
 
         if (this.props.onClickMap) {
-          this.props.onClickMap(e.features[0].properties.name);
+          this.props.onClickMap(e.features[0].properties.name, e.features[0].properties.density);
         }
       }
     });
