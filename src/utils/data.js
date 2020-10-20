@@ -39,20 +39,21 @@ export const getDateObject = function(){
     let dateObject = dataObject.map(curr => {
         const dateString = curr.date;
         const dateSplit = dateString.split('-');
-        const date = new Date( dateSplit[0],dateSplit[1],dateSplit[2])
+        const date = new Date(parseInt(dateSplit[0]),parseInt(dateSplit[1]) - 1,parseInt(dateSplit[2]));
         return {id: curr.id, date: date};
     });
     return dateObject;
-
 }
 
 export const getMinDate = function(){
+    //TODO: store this in the object
     return getDateObject().reduce(function(prev, curr) {
         return prev.date < curr.date ? prev : curr;
     });
 }
 
 export const getMaxDate = function(){
+    //TODO: store this in the object
     return getDateObject().reduce(function(prev, curr) {
         return prev.date > curr.date ? prev : curr;
     });
@@ -61,20 +62,17 @@ export const getMaxDate = function(){
 export const getDateRange = function(){
     let min = getMinDate();
     let max = getMaxDate();
-    
     const diffTime = Math.abs(max.date.getTime() - min.date.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
     return diffDays;
 }
 
 export const mapIntToDate = function(int){
-    let min = {...getMinDate()};
-    let selectedDate = new Date(min.date.getYear(), min.date.getMonth(), min.date.getDate());
-    
-    selectedDate.setDate(selectedDate.getDate() + int-1);
-    const currentMonth = selectedDate.getMonth() + 1;
-    //TODO: get year to work; currently displays a negative year
-    return currentMonth + '/' + selectedDate.getDate();
+    let days = int - 1;
+    let min = {...getMinDate()}.date;
+    let newDate = new Date(min.getFullYear(),min.getMonth(), min.getDate() + days);
+    const month = newDate.getMonth() + 1;
+    return month + '/' + newDate.getDate() + '/' + newDate.getFullYear();
 }
 
 export const getDefaultDateInt = function(){
