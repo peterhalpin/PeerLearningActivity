@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { statesData } from '../components/Map/us-states.js';
 let headings = [];
 let dataObject;
 
@@ -79,4 +80,37 @@ export const mapIntToDate = function(int){
 
 export const getDefaultDateInt = function(){
     return Math.floor(getDateRange()/2);
+}
+
+export const loadDataIntoGeoJSON = function() {
+    const json = getData();
+    console.log(json);
+    var intermObj = {};
+    for(const entry of json) {
+      console.log(entry);
+      const stateName = entry.location;
+      const date = entry.date;
+      const deaths = entry.deaths;
+      const totalDeaths = entry.total_deaths;
+      const tests = entry.tests;
+      const totalTests = entry.total_tests;
+      const infections = entry.infections;
+      const totalInfections = entry.total_infections;
+      console.log(stateName);
+      if (!intermObj[stateName]) {
+        intermObj[stateName] = {};
+      }
+      intermObj[stateName][date] = {
+        deaths: deaths,
+        totalDeaths: totalDeaths,
+        tests: tests,
+        totalTests: totalTests,
+        infections: infections,
+        totalInfections: totalInfections,
+      } 
+    }
+    for (var feature of statesData.features) {
+      const stateName = feature.properties.name;
+      feature.properties.data = intermObj[stateName];
+    }
 }
