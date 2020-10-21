@@ -5,19 +5,40 @@ import HelpButton from './components/help/HelpButton.js';
 import TogetherButton from './components/TogetherButton/TogetherButton.js';
 import LogTable from './components/logTable/logTable.js';
 import MapAndDataContainer from './components/MapAndDataContainer/MapAndDataContainer.js';
+import LandingPage from './components/LandingPage/LandingPage.js';
 
-function App() {
-  
-  return (
-    <React.Fragment>
-      <HelpButton />
-      <Container>
-        <TogetherButton/>
-        <LogTable/>
-        <MapAndDataContainer/>
-      </Container>
-    </React.Fragment>
-  );
+class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      hasBegun:false
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({hasBegun: true})
+  }
+
+  render(){
+    if(this.state.hasBegun){
+      return (
+        <React.Fragment>
+          <HelpButton />
+          <Container>
+            <TogetherButton/>
+            <LogTable/>
+            <MapAndDataContainer/>
+          </Container>
+        </React.Fragment>
+      );
+    } else {
+      return(
+        <LandingPage onClick = {this.handleClick}/>
+      );
+    }
+  }
 }
 
 export default App;

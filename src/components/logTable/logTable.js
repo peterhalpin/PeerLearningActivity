@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { List, Item, Form, Message, Button } from '../../../node_modules/semantic-ui-react';
+import { List, Form, Button } from '../../../node_modules/semantic-ui-react';
 import './logTable.css';
 
 class LogTable extends React.Component {
