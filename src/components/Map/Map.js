@@ -228,7 +228,7 @@ class Map extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if ((prevProps.selectedDate !== this.props.selectedDate) && this.finishLoadingMapStyle) {
-      console.log(this.props.selectedDate);
+      // console.log(this.props.selectedDate);
       Object.keys(enumDataLayerType).forEach(dataType => {
         this.map.setFilter(dataType, ['==', ['string', ['get', 'date']], mapIntToDate(this.props.selectedDate)]);
       })

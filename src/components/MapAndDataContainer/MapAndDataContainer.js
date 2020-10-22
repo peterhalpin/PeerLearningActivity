@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import './MapAndDataContainer.css';
 import Map from '../Map/Map.js';
 import DataPanels from '../dataPanels/dataPanels.js';
-import {getDefaultHeading, mapIntToDate} from '../../utils/data.js';
+import {getDefaultHeading, mapIntToDate, organizedObject} from '../../utils/data.js';
 
 class MapAndDataContainer extends React.Component {
   constructor(props) {
@@ -15,41 +15,68 @@ class MapAndDataContainer extends React.Component {
       selectedDataType: getDefaultHeading(),
     };
     this.setData = this.setData.bind(this);
-    this.setSelectState = this.setSelectState.bind(this);
-    this.setCurrentData = this.setCurrentData.bind(this);
+    this.changeSelectedState = this.changeSelectedState.bind(this);
+    this.changeCurrentData = this.changeCurrentData.bind(this);
+    this.changeSelectedDate = this.changeSelectedDate.bind(this);
+    this.changeDataType = this.changeDataType.bind(this);
+
     this.selectStateWithData = this.selectStateWithData.bind(this);
     this.updateLayer = this.updateLayer.bind(this);
   }
 
   setData(type, value) {
     this.setState({[type]: [value]});
-    if(type === 'selectedDataType') {
-      this.updateLayer(value);
-    }
-    if(type === 'selectedDate') {
-      // this.childMap.map.setFilter('total_tests', ['==', ['string', ['get', 'date']], mapIntToDate(value)]);
-    }
   }
 
-  setSelectState(name) {
+  refreshData() {
+    if(organizedObject) {
+      console.log(this.state.selectedState);
+      let dataForState = organizedObject[this.state.selectedState];
+      if(dataForState) {
+      console.log(dataForState);
+      console.log(this.state.selectedDataType);
+          const destylizedType = this.state.selectedDataType.toString().replace(' ', '_');
+        let dataForType = dataForState[destylizedType];
+        if(dataForType) {
+      console.log(dataForType);
+      console.log(this.state.selectedDate);
+          let dataForDate = dataForType[mapIntToDate(this.state.selectedDate)];
+          this.setState({currentData: [dataForDate]});
+          console.log(this.state.currentData);
+        }
+      }
+    }
+
+  }
+
+  changeSelectedState(name) {
     this.setData('selectedState', name);
-    console.log(this.state.selectedState);
   }
 
-  setCurrentData(data) {
+  changeCurrentData(data) {
     this.setData('currentData', data);
-    console.log(this.state.currentData);
+  }
+
+  changeSelectedDate(date) {
+    this.setData('selectedDate', date);
+    this.refreshData();
+  }
+
+  changeDataType(type) {
+    this.setData('selectedDataType', type);
+    this.refreshData();
+    const destylizedValue = type.replace(' ', '_');
+    this.updateLayer(destylizedValue);
   }
 
   selectStateWithData(stateName, data) {
-    this.setSelectState(stateName);
-    this.setCurrentData(data);
+    this.changeSelectedState(stateName);
+    this.changeCurrentData(data);
   }
 
   updateLayer(value) {
-    this.setState({selectedDataType: [value]});
-    const destylizedValue = value.replace(' ', '_');
-    this.childMap.switchToLayer(destylizedValue);
+    // this.setState({selectedDataType: [value]});
+    this.childMap.switchToLayer(value);
   }
 
   render() {
@@ -57,7 +84,9 @@ class MapAndDataContainer extends React.Component {
       <Container>
         <DataPanels 
           updateLayer={this.updateLayer}
-          setData={this.setData}
+          // setData={this.setData}
+          changeDataType={this.changeDataType}
+          changeSelectedDate={this.changeSelectedDate}
           selectedDate={this.state.selectedDate} 
           currentData={this.state.currentData} 
           selectedDataType={this.state.selectedDataType} 

@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { statesData, dataCollect } from '../components/Map/us-states.js';
 let headings = [];
 let dataObject;
-var organizedObject = {};
+export var organizedObject = {};
 
 export const renderData = async function(){
     await d3.csv("/data/COVID_Data_2020_07_04.csv").then(function(data) {
