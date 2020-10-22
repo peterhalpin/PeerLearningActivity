@@ -21,12 +21,16 @@ class Header extends React.Component {
     myPeers.forEach(p => {
       names.push(p.name);
     });
-    this.setState({users: names});
+    names.sort(); // hack for everyone having the same order
+    this.setState({
+      users: names,
+      numOfUser: names.length
+    });
   }
 
   endTurn() { 
     this.setState({
-      currNum: (this.state.currNum+1)%3
+      currNum: (this.state.currNum+1) % this.state.numOfUser
     })
   }
 
