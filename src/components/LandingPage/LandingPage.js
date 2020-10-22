@@ -14,7 +14,7 @@ function LandingPage(props) {
       <li>Clicking submit ends your turn. Only use the data panelsalter the data that the map displays and press submit when it is your turn. </li>
     </ul>
     </div>
-    <button onClick={props.onClick} className="ui button">
+    <button onClick={props.onClick} className="ui button landingButton">
       Click here to begin
     </button>
   </div>

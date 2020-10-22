@@ -1,0 +1,20 @@
+.LandingPage {
+    margin: auto;
+    width: 60%;
+    top: 20px;
+    position:relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.landingHeader{
+    text-align: center;
+}
+
+.landingButton{
+    width: 200px;
+    height:75px;
+    top: 20px;
+    position: relative;
+}
