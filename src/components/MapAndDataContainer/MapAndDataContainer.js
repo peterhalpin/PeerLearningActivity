@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import './MapAndDataContainer.css';
 import Map from '../Map/Map.js';
 import DataPanels from '../dataPanels/dataPanels.js';
-import {getDefaultHeading} from '../../utils/data.js';
+import {getDefaultHeading, mapIntToDate} from '../../utils/data.js';
 
 class MapAndDataContainer extends React.Component {
   constructor(props) {
@@ -25,6 +25,9 @@ class MapAndDataContainer extends React.Component {
     this.setState({[type]: [value]});
     if(type === 'selectedDataType') {
       this.updateLayer(value);
+    }
+    if(type === 'selectedDate') {
+      // this.childMap.map.setFilter('total_tests', ['==', ['string', ['get', 'date']], mapIntToDate(value)]);
     }
   }
 
@@ -63,6 +66,7 @@ class MapAndDataContainer extends React.Component {
         <Map 
           ref={ref => (this.childMap = ref)}  
           selectedDate={this.state.selectedDate} 
+          selectedDataType={this.state.selectedDataType} 
           onClickMap={this.selectStateWithData}
         />
       </Container>
