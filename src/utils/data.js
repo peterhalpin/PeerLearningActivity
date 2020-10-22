@@ -102,11 +102,11 @@ export const loadDataIntoGeoJSON = function() {
       if (!intermObj[stateName]) {
         intermObj[stateName] = {
           deaths: [],
-          totalDeaths: [],
+          total_deaths: [],
           tests: [],
-          totalTests: [],
+          total_tests: [],
           infections: [],
-          totalInfections: [],
+          total_infections: [],
         };
       }
       // intermObj[stateName][date] = {
@@ -120,19 +120,19 @@ export const loadDataIntoGeoJSON = function() {
       intermObj[stateName]['deaths'].push({
         date: date, cases: deaths
       })
-      intermObj[stateName]['totalDeaths'].push({
+      intermObj[stateName]['total_deaths'].push({
         date: date, cases: totalDeaths
       })
       intermObj[stateName]['tests'].push({
         date: date, cases: tests
       })
-      intermObj[stateName]['totalTests'].push({
+      intermObj[stateName]['total_tests'].push({
         date: date, cases: totalTests
       })
       intermObj[stateName]['infections'].push({
         date: date, cases: infections
       })
-      intermObj[stateName]['totalInfections'].push({
+      intermObj[stateName]['total_infections'].push({
         date: date, cases: totalInfections
       })
     }

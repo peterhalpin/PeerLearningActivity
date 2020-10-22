@@ -151,8 +151,8 @@ class Map extends React.Component {
           // const obj = JSON.parse(e.features[0].properties.data);
           // console.log(obj[dateFormatted]);
 
-          // console.log(e.features[0].properties.data[0]['7/5'])
-          // this.props.onClickMap(e.features[0].properties.name, e.features[0].properties.data[this.props.currentDate][this.props.selectedDataType]);
+          console.log(e.features[0].properties.cases)
+          this.props.onClickMap(e.features[0].properties.name, e.features[0].properties.cases);
         }
       }
     });
@@ -191,24 +191,27 @@ class Map extends React.Component {
     });
 
     this.map.on('load', () => {
-      const dataId = 'states-data';
-      // attach geojson data to the map
-      this.map.addSource(dataId, {
-        type: 'geojson',
-        data: dataCollect.totalTests
-      })
+      Object.keys(enumDataLayerType).forEach(dataType => {
+        const dataId = 'states_data_' + dataType;
+        // attach geojson data to the map
+        this.map.addSource(dataId, {
+          type: 'geojson',
+          data: dataCollect[dataType]
+        })
 
-      // Object.keys(enumDataLayerType).forEach(curr => {
-      //   this.initDataLayer(dataId, enumDataLayerType[curr], false);
-      // })
-      this.initDataLayer(dataId, enumDataLayerType.total_tests, true);
-      // this.switchToLayer(getDefaultHeading());
+        // Object.keys(enumDataLayerType).forEach(curr => {
+        //   this.initDataLayer(dataId, enumDataLayerType[curr], false);
+        // })
+        this.initDataLayer(dataId, enumDataLayerType[dataType], false);
+
+      }); 
+      this.switchToLayer(this.props.selectedDataType);
       
       // add dashed-line borders to states
       this.map.addLayer({
         id: 'states-borders',
         type: 'line',
-        source: dataId,
+        source: 'states_data_' + this.props.selectedDataType,
         layout: {},
         paint: {
           'line-color': '#FFFFFF',
@@ -226,10 +229,11 @@ class Map extends React.Component {
   componentDidUpdate(prevProps) {
     if ((prevProps.selectedDate !== this.props.selectedDate) && this.finishLoadingMapStyle) {
       console.log(this.props.selectedDate);
-      this.map.setFilter('total_tests', ['==', ['string', ['get', 'date']], mapIntToDate(this.props.selectedDate)]);
+      Object.keys(enumDataLayerType).forEach(dataType => {
+        this.map.setFilter(dataType, ['==', ['string', ['get', 'date']], mapIntToDate(this.props.selectedDate)]);
+      })
     }
   }
-
 
   render() {
     return (
