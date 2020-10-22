@@ -24,24 +24,27 @@ class MapAndDataContainer extends React.Component {
     this.updateLayer = this.updateLayer.bind(this);
   }
 
-  setData(type, value) {
+  setData(type, value, callback) {
+    if(callback) {
+      this.setState({[type]: [value]}, callback);
+    }
     this.setState({[type]: [value]});
   }
 
   refreshData() {
     if(organizedObject) {
-      console.log(this.state.selectedState);
+      // console.log(this.state.selectedState);
       let dataForState = organizedObject[this.state.selectedState];
       if(dataForState) {
-      console.log(dataForState);
-      console.log(this.state.selectedDataType);
-          const destylizedType = this.state.selectedDataType.toString().replace(' ', '_');
+      // console.log(dataForState);
+      // console.log(this.state.selectedDataType);
+        let destylizedType = this.state.selectedDataType.toString().replace(' ', '_');
         let dataForType = dataForState[destylizedType];
         if(dataForType) {
-      console.log(dataForType);
-      console.log(this.state.selectedDate);
+      // console.log(dataForType);
+      // console.log(this.state.selectedDate);
           let dataForDate = dataForType[mapIntToDate(this.state.selectedDate)];
-          this.setState({currentData: [dataForDate]});
+          this.changeCurrentData(dataForDate);
           console.log(this.state.currentData);
         }
       }
@@ -50,21 +53,20 @@ class MapAndDataContainer extends React.Component {
   }
 
   changeSelectedState(name) {
-    this.setData('selectedState', name);
+    this.setData('selectedState', name, undefined);
   }
 
   changeCurrentData(data) {
-    this.setData('currentData', data);
+    this.setData('currentData', data, undefined);
   }
 
   changeSelectedDate(date) {
-    this.setData('selectedDate', date);
-    this.refreshData();
+    this.setData('selectedDate', date, this.refreshData);
   }
 
   changeDataType(type) {
-    this.setData('selectedDataType', type);
-    this.refreshData();
+    console.log('change data type');
+    this.setData('selectedDataType', type, this.refreshData);
     const destylizedValue = type.replace(' ', '_');
     this.updateLayer(destylizedValue);
   }
@@ -75,7 +77,6 @@ class MapAndDataContainer extends React.Component {
   }
 
   updateLayer(value) {
-    // this.setState({selectedDataType: [value]});
     this.childMap.switchToLayer(value);
   }
 
@@ -84,7 +85,6 @@ class MapAndDataContainer extends React.Component {
       <Container>
         <DataPanels 
           updateLayer={this.updateLayer}
-          // setData={this.setData}
           changeDataType={this.changeDataType}
           changeSelectedDate={this.changeSelectedDate}
           selectedDate={this.state.selectedDate} 
