@@ -14,7 +14,6 @@ function App() {
       <HelpButton />
       <Header />
       <Container>
-        <TogetherButton/>
         <LogTable/>
         <MapAndDataContainer/>
       </Container>
