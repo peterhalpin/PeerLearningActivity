@@ -1,4 +1,5 @@
 export const layerColors = {
+  // TODO: change layer scale to the actual number
     'mapExample' : {
         0: '#F2F12D',
         10: '#EED322',

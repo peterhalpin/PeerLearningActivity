@@ -1,10 +1,10 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import './Map.css';
-import { statesData, dataCollect } from './us-states.js';
+import { dataCollect } from './us-states.js';
 import { MAPBOX_TOKEN } from './tokens.js';
 import { layerColors } from './layerColors.js';
-import { getDefaultHeading, getHeadings, renderData, loadDataIntoGeoJSON, mapIntToDate} from '../../utils/data.js';
+import { getHeadings, renderData, loadDataIntoGeoJSON, mapIntToDate} from '../../utils/data.js';
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
@@ -22,7 +22,6 @@ const setEnum = function(){
       dataLayerTypes = {...dataLayerTypes, [enumValue]: {name: curr, layerId: curr}};
   });
   enumDataLayerType = {...dataLayerTypes}; //TODO: replace this weith dataLayerTypes everywhere since it's no longer enum
-  console.log(enumDataLayerType);
 }
 
 newPromise.then(setEnum).then(loadDataIntoGeoJSON);
