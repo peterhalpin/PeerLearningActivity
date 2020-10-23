@@ -1,6 +1,8 @@
 import * as d3 from 'd3';
+import { statesData, dataCollect } from '../components/Map/us-states.js';
 let headings = [];
 let dataObject;
+export var organizedObject = {};
 
 export const renderData = async function(){
     await d3.csv("/data/COVID_Data_2020_07_04.csv").then(function(data) {
@@ -77,4 +79,67 @@ export const mapIntToDate = function(int){
 
 export const getDefaultDateInt = function(){
     return Math.floor(getDateRange()/2);
+}
+
+export const loadDataIntoGeoJSON = function() {
+    const json = getData();
+    for(const entry of json) {
+      const stateName = entry.location;
+      const dateString = entry.date;
+      const dateSplit = dateString.split('-');
+      const dateObj = new Date( dateSplit[0],dateSplit[1],dateSplit[2])
+      const currentMonth = dateObj.getMonth() + 1;
+      const currentDate = dateObj.getDate() + 1;
+      const date = currentMonth + '/' + currentDate;
+      const deaths = parseFloat(entry.deaths);
+      const totalDeaths = parseFloat(entry.total_deaths);
+      const tests = parseFloat(entry.tests);
+      const totalTests = parseFloat(entry.total_tests);
+      const infections = parseFloat(entry.infections);
+      const totalInfections = parseFloat(entry.total_infections);
+      if (!organizedObject[stateName]) {
+        organizedObject[stateName] = {
+          deaths: {},
+          total_deaths: {},
+          tests: {},
+          total_tests: {},
+          infections: {},
+          total_infections: {}
+        };
+      }
+      organizedObject[stateName]['deaths'][date] = deaths;
+      organizedObject[stateName]['total_deaths'][date] = totalDeaths;
+      organizedObject[stateName]['tests'][date] = tests;
+      organizedObject[stateName]['total_tests'][date] = totalTests;
+      organizedObject[stateName]['infections'][date] = infections;
+      organizedObject[stateName]['total_infections'][date] = totalInfections;
+    }
+  
+  for (const dataType of Object.keys(organizedObject['Alabama'])) {
+    const statesDataForType = { type:"FeatureCollection",features:[] };
+    for (var feature of statesData.features) {
+      const stateName = feature.properties.name;
+      console.log(stateName);
+      const state = organizedObject[stateName]; 
+      // console.log(state);
+      if (state) {
+        const data = state[dataType];
+        // console.log(deaths);
+        for (const date of Object.keys(data)) {
+          const featureNew = JSON.parse(JSON.stringify(feature));
+          featureNew.properties.date = date;
+          featureNew.properties.cases = data[date];
+          statesDataForType.features.push({...featureNew});
+        }
+
+      }
+      // console.log(statesDataDeath);
+      dataCollect[dataType] = {...statesDataForType};
+      
+
+    }
+
+  }
+  console.log(dataCollect);
+  
 }
