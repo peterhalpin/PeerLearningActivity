@@ -9,7 +9,10 @@ class DataPanels extends React.Component {
     render() {
         return(
           <div className='dataPanels'>
-            <Slider changeSelectedDate={this.props.changeSelectedDate}/>
+            <Slider 
+              selectedDate={this.props.selectedDate}
+              changeSelectedDate={this.props.changeSelectedDate}
+            />
             <RadioButtonPanel changeDataType={this.props.changeDataType}/>
             <DataDisplay 
               selectedDate={this.props.selectedDate} 

@@ -101,12 +101,6 @@ export const loadDataIntoGeoJSON = function() {
       const totalInfections = parseFloat(entry.total_infections);
       if (!organizedObject[stateName]) {
         organizedObject[stateName] = {
-          // deaths: [],
-          // total_deaths: [],
-          // tests: [],
-          // total_tests: [],
-          // infections: [],
-          // total_infections: [],
           deaths: {},
           total_deaths: {},
           tests: {},
@@ -115,43 +109,14 @@ export const loadDataIntoGeoJSON = function() {
           total_infections: {}
         };
       }
-      // organizedObject[stateName][date] = {
-      //   deaths: deaths,
-      //   totalDeaths: totalDeaths,
-      //   tests: tests,
-      //   totalTests: totalTests,
-      //   infections: infections,
-      //   totalInfections: totalInfections,
-      // } 
       organizedObject[stateName]['deaths'][date] = deaths;
       organizedObject[stateName]['total_deaths'][date] = totalDeaths;
       organizedObject[stateName]['tests'][date] = tests;
       organizedObject[stateName]['total_tests'][date] = totalTests;
       organizedObject[stateName]['infections'][date] = infections;
       organizedObject[stateName]['total_infections'][date] = totalInfections;
-      // .push({
-      //   date: date, cases: deaths
-      // })
-      // organizedObject[stateName]['total_deaths'].push({
-      //   date: date, cases: totalDeaths
-      // })
-      // organizedObject[stateName]['tests'].push({
-      //   date: date, cases: tests
-      // })
-      // organizedObject[stateName]['total_tests'].push({
-      //   date: date, cases: totalTests
-      // })
-      // organizedObject[stateName]['infections'].push({
-      //   date: date, cases: infections
-      // })
-      // organizedObject[stateName]['total_infections'].push({
-      //   date: date, cases: totalInfections
-      // })
     }
-    // console.log(organizedObject);
   
-  // const statesDataDeath = JSON.parse(JSON.stringify(statesData));
-  console.log(organizedObject['Alabama']);
   for (const dataType of Object.keys(organizedObject['Alabama'])) {
     const statesDataForType = { type:"FeatureCollection",features:[] };
     for (var feature of statesData.features) {
@@ -173,9 +138,6 @@ export const loadDataIntoGeoJSON = function() {
       // console.log(statesDataDeath);
       dataCollect[dataType] = {...statesDataForType};
       
-      // feature.properties.data = {...organizedObject[stateName]}; 
-      // feature.properties.data = []; 
-      // feature.properties.data.push(organizedObject[stateName]);
 
     }
 

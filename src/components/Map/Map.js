@@ -140,17 +140,7 @@ class Map extends React.Component {
           { select: true }
         );
 
-        if (this.props.onClickMap && this.props.selectedDate && this.props.selectedDataType ) {
-          console.log(this.props.selectedDate);
-          console.log(this.props.selectedDataType);
-          const dateFormatted = mapIntToDate(this.props.selectedDate);
-          console.log(dateFormatted);
-          // console.log(e.features[0].properties.data[dateFormatted][this.props.selectedDataType])
-          // console.log(e.features[0].properties.data)
-          console.log(e.features[0].properties);
-          // const obj = JSON.parse(e.features[0].properties.data);
-          // console.log(obj[dateFormatted]);
-
+        if (this.props.onClickMap) {
           console.log(e.features[0].properties.cases)
           this.props.onClickMap(e.features[0].properties.name, e.features[0].properties.cases);
         }
@@ -199,9 +189,6 @@ class Map extends React.Component {
           data: dataCollect[dataType]
         })
 
-        // Object.keys(enumDataLayerType).forEach(curr => {
-        //   this.initDataLayer(dataId, enumDataLayerType[curr], false);
-        // })
         this.initDataLayer(dataId, enumDataLayerType[dataType], false);
 
       }); 

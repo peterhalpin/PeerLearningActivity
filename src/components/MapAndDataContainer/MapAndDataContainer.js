@@ -3,15 +3,15 @@ import { Container } from 'semantic-ui-react';
 import './MapAndDataContainer.css';
 import Map from '../Map/Map.js';
 import DataPanels from '../dataPanels/dataPanels.js';
-import {getDefaultHeading, mapIntToDate, organizedObject} from '../../utils/data.js';
+import {getDefaultHeading, getDefaultDateInt, mapIntToDate, organizedObject} from '../../utils/data.js';
 
 class MapAndDataContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedState: 'Alabama',
-      currentData: 20,
-      selectedDate: 0,
+      currentData: 0,
+      selectedDate: getDefaultDateInt(),
       selectedDataType: getDefaultHeading(),
     };
     this.setData = this.setData.bind(this);
@@ -80,6 +80,9 @@ class MapAndDataContainer extends React.Component {
     this.childMap.switchToLayer(value);
   }
 
+  componentDidMount() {
+    this.refreshData();
+  }
   render() {
     return(
       <Container>
