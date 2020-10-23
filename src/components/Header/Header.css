@@ -1,5 +1,10 @@
 .Header {
     z-index: 1;
     position: absolute;
-    left: 50%;
+    top: 15px;
+    width: 200px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+
 }

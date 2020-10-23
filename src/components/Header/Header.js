@@ -13,6 +13,7 @@ class Header extends React.Component {
   }
 
   loadPeers() {
+    console.log("load peers");
     var togetherPeers = window.TogetherJS.require('peers');
     var myName = togetherPeers.Self.name;
     var myPeers = togetherPeers.getAllPeers();
@@ -26,6 +27,7 @@ class Header extends React.Component {
       users: names,
       numOfUser: names.length
     });
+    console.log(names);
   }
 
   endTurn() { 
@@ -36,10 +38,12 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="ui raised center segment compact Header">
-        <p>It's {this.state.users[this.state.currNum]}'s turn</p>
-        <button className="ui button" onClick={() => this.endTurn() }>End Turn</button>
-        <button className="ui button" onClick={() => this.loadPeers() }>Refresh</button>
+      <div className="Header">
+        <div className="ui raised segment Header">
+          <p>It's {this.state.users[this.state.currNum]}'s turn</p>
+          <button className="ui button" onClick={() => this.endTurn() }>End Turn</button>
+          <button className="ui button" onClick={() => this.loadPeers() }>Refresh</button>
+        </div>
       </div>
     );
 

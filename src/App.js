@@ -11,8 +11,8 @@ function App() {
   return (
     <React.Fragment>
       <HelpButton />
-      <Header />
       <Container>
+        <Header />
         <LogTable/>
         <MapAndDataContainer/>
       </Container>
