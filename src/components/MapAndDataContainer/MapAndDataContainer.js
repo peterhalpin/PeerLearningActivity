@@ -29,6 +29,14 @@ class MapAndDataContainer extends React.Component {
       this.setState({[type]: [value]}, callback);
     }
     this.setState({[type]: [value]});
+    // sync togetherJS
+    if (window.TogetherJS.running) {
+      window.TogetherJS.send({
+        type: 'dataUpdate',
+        dataType: type,
+        dataValue: value
+      })
+    }
   }
 
   refreshData() {
@@ -82,6 +90,14 @@ class MapAndDataContainer extends React.Component {
 
   componentDidMount() {
     this.refreshData();
+    // register together Sync
+    window.TogetherJS.hub.on('dataUpdate', msg => {
+      if (!msg.sameUrl) return;
+      const type = msg.dataType;
+      const value = msg.dataValue;
+      // can potentially call setData, but I'm afraid that it will run into a circle
+      this.setState({[type]: [value]});
+    });
   }
   render() {
     return(
