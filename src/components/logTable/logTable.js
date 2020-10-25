@@ -37,12 +37,8 @@ class LogTable extends React.Component {
 
   componentDidMount() {
     window.TogetherJS.hub.on('logTableUpdate', msg => {
-      if (!msg.sameUrl) {
-        return;
-      }
-      this.setState({
-        items: msg.log
-      })
+      if (!msg.sameUrl) return;
+      this.setState({ items: msg.log });
     });
   }
 
