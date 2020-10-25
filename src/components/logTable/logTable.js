@@ -14,19 +14,36 @@ class LogTable extends React.Component {
   }
 
   handleFormChange(e) {
-    console.log(e.target.value);
-    console.log(this.state.items);
     this.setState({
       currItem: e.target.value 
     });
     
   }
 
-  handleSubmit(e) {
+  handleSubmit() {
     const currList = this.state.items.concat(this.state.currItem);
     this.setState({
-      items: currList
+      items: currList,
+      currItem: ""
     })
+    // together JS running update
+    if (window.TogetherJS.running) {
+      window.TogetherJS.send({
+        type: 'logTableUpdate',
+        log: currList
+      });
+    }
+  }
+
+  componentDidMount() {
+    window.TogetherJS.hub.on('logTableUpdate', msg => {
+      if (!msg.sameUrl) {
+        return;
+      }
+      this.setState({
+        items: msg.log
+      })
+    });
   }
 
   render() {
@@ -35,7 +52,7 @@ class LogTable extends React.Component {
         <div className="ui segment raised">
           <p>Student log</p>
             <Form >
-              <Form.Input placeholder='put your data log here' onChange={this.handleFormChange}/>
+              <Form.Input placeholder='put your data log here' onChange={this.handleFormChange} value={this.state.currItem}/>
               <Button onClick={this.handleSubmit}>Submit</Button>
             </Form>
 
