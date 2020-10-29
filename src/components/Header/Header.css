@@ -1,9 +1,10 @@
-.LogTable {
+.Header {
     z-index: 1;
     position: absolute;
-    top: 175px;
-    width:200px;
-    right: 60px;
+    top: 15px;
+    width: 200px;
+    right: 30px;
     display: flex;
     flex-direction: column;
+
 }
