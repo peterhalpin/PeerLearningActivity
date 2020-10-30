@@ -26,5 +26,13 @@ describe('<logTable /> component test', () => {
     screen.debug();
     expect(screen.getByPlaceholderText(/log/i)).toHaveValue('a');
   });
+  
+  test('log should change after submit', () => {
+    render(<LogTable testEnv="true"/>);
+    const logTable = screen.getByTestId('logTable');
+    fireEvent.change(screen.getByPlaceholderText(/log/i), { target: { value: 'a' } })
+    screen.debug();
+    expect(screen.getByPlaceholderText(/log/i)).toHaveValue('a');
+  });
 
 });
