@@ -13,21 +13,21 @@ class Header extends React.Component {
   }
 
   loadPeers() {
-    console.log("load peers");
-    var togetherPeers = window.TogetherJS.require('peers');
-    var myName = togetherPeers.Self.name;
-    var myPeers = togetherPeers.getAllPeers();
     var names = [];
-    names.push(myName);
-    myPeers.forEach(p => {
-      names.push(p.name);
-    });
+    if (!this.props.testEnv) {
+      var togetherPeers = window.TogetherJS.require('peers');
+      var myPeers = togetherPeers.getAllPeers();
+      names.push(togetherPeers.Self.name);
+      myPeers.forEach(p => { names.push(p.name); });
+    } else {
+      // populate test data to get around TogetherJS dependency
+      names = ['user1', 'user2', 'user3', 'user4'];
+    }
     names.sort(); // hack for everyone having the same order
     this.setState({
       users: names,
       numOfUser: names.length
     });
-    console.log(names);
   }
 
   endTurn() { 
@@ -38,7 +38,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="Header">
+      <div className="Header" data-testid="Header">
         <div className="ui raised segment Header">
           <p>It's {this.state.users[this.state.currNum]}'s turn</p>
           <button className="ui button" onClick={() => this.endTurn() }>End Turn</button>
