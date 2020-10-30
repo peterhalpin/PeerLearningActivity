@@ -6,6 +6,7 @@ import LogTable from './components/logTable/logTable.js';
 import MapAndDataContainer from './components/MapAndDataContainer/MapAndDataContainer.js';
 import Header from './components/Header/Header.js';
 import LandingPage from './components/LandingPage/LandingPage.js';
+import QaPanel from './components/qaPanel/qaPanel.js';
 
 class App extends React.Component {
 
@@ -33,6 +34,7 @@ class App extends React.Component {
           <Container>
             <Header />
             <LogTable ref={ref => this.childLogTable = ref}/>
+            <QaPanel/>
             <MapAndDataContainer sendMapData={this.sendMapData} />
           </Container>
         </React.Fragment>
