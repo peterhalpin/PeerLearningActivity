@@ -1,5 +1,6 @@
 import React from 'react';
 import { List, Form, Button } from '../../../node_modules/semantic-ui-react';
+import { mapIntToDate } from '../../utils/data.js'
 import './logTable.css';
 
 class LogTable extends React.Component {
@@ -64,7 +65,7 @@ class LogTable extends React.Component {
                 if(typeof item === 'string') {
                   return <List.Item>{item}</List.Item>
                 } else {
-                  return <List.Item><List.Header>{item.selectedState}</List.Header>{item.selectedDataType} on {item.selectedDate}: {item.currentData}</List.Item>
+                  return <List.Item><List.Header>{item.selectedState}</List.Header>{item.selectedDataType} on {mapIntToDate(item.selectedDate)}: {item.currentData}</List.Item>
                 }
               }
               return <List.Item></List.Item>
