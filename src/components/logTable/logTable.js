@@ -68,7 +68,7 @@ class LogTable extends React.Component {
                   return <List.Item><List.Header>{item.selectedState}</List.Header>{item.selectedDataType} on {mapIntToDate(item.selectedDate)}: {item.currentData}</List.Item>
                 }
               }
-              return <List.Item></List.Item>
+              return null;
             })}
           </List>
         </div>
