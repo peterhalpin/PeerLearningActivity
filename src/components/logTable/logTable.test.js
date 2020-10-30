@@ -31,8 +31,11 @@ describe('<logTable /> component test', () => {
     render(<LogTable testEnv="true"/>);
     const logTable = screen.getByTestId('logTable');
     fireEvent.change(screen.getByPlaceholderText(/log/i), { target: { value: 'a' } })
+    fireEvent.click(screen.getByText(/submit/i));
+    expect(screen.getByPlaceholderText(/log/i)).toHaveValue('');
+    expect(screen.getByRole(/listitem/i)).toHaveTextContent('a');
     screen.debug();
-    expect(screen.getByPlaceholderText(/log/i)).toHaveValue('a');
+
   });
 
 });
