@@ -35,6 +35,10 @@ class LogTable extends React.Component {
     }
   }
 
+  receiveMapData(data) {
+    console.log(data);
+  }
+
   componentDidMount() {
     window.TogetherJS.hub.on('logTableUpdate', msg => {
       if (!msg.sameUrl) return;

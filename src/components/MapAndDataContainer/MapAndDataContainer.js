@@ -22,6 +22,7 @@ class MapAndDataContainer extends React.Component {
 
     this.selectStateWithData = this.selectStateWithData.bind(this);
     this.updateLayer = this.updateLayer.bind(this);
+    this.sendData = this.sendData.bind(this);
   }
 
   setData(type, value, callback) {
@@ -88,6 +89,11 @@ class MapAndDataContainer extends React.Component {
     this.childMap.switchToLayer(value);
   }
 
+  sendData() {
+    const data = this.state;
+    this.props.sendMapData(data);
+  }
+
   componentDidMount() {
     this.refreshData();
     // register together Sync
@@ -106,6 +112,7 @@ class MapAndDataContainer extends React.Component {
           updateLayer={this.updateLayer}
           changeDataType={this.changeDataType}
           changeSelectedDate={this.changeSelectedDate}
+          sendData={this.sendData}
           selectedDate={this.state.selectedDate} 
           currentData={this.state.currentData} 
           selectedDataType={this.state.selectedDataType} 
