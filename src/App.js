@@ -16,12 +16,16 @@ class App extends React.Component {
       hasBegun:false
     }
     this.handleClick = this.handleClick.bind(this);
+    this.sendMapData = this.sendMapData.bind(this);
   }
 
   handleClick() {
     this.setState({hasBegun: true})
   }
 
+  sendMapData(data) {
+    this.childLogTable.receiveMapData(data)
+  }
   render(){
     if(this.state.hasBegun){
       return (
@@ -29,9 +33,9 @@ class App extends React.Component {
           <HelpButton />
           <Container>
             <Header />
-            <LogTable/>
+            <LogTable ref={ref => this.childLogTable = ref}/>
             <QaPanel/>
-            <MapAndDataContainer/>
+            <MapAndDataContainer sendMapData={this.sendMapData} />
           </Container>
         </React.Fragment>
       );
