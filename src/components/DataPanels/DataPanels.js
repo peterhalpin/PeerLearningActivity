@@ -8,7 +8,7 @@ class DataPanels extends React.Component {
 
     render() {
         return(
-          <div className='dataPanels'>
+          <div className='dataPanels' data-testid='DataPanel'>
             <Slider 
               selectedDate={this.props.selectedDate}
               changeSelectedDate={this.props.changeSelectedDate}
