@@ -9,7 +9,7 @@ function RadioButton(headings, checkedButton, handleChange) {
             return(
         <div className="field" key = {nameCount}>
             <div className="ui radio checkbox">
-                <input type="radio" name={'button' + nameCount} value={currHeading} checked={checkedButton === currHeading} onChange={handleChange} />
+                <input type="radio" name={'button'} value={currHeading} checked={checkedButton === currHeading} onChange={handleChange} />
                 <label><p className='capitalize'>{currHeading}</p></label>
             </div>
         </div>
