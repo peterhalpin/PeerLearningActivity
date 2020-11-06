@@ -30,7 +30,7 @@ class Header extends React.Component {
     });
     console.log(names);
     // together JS running update
-    if (window.TogetherJS.running) {
+    if (!this.props.testEnv && window.TogetherJS.running) {
       window.TogetherJS.send({
         type: 'headerRefresh',
         users: names,
@@ -44,7 +44,7 @@ class Header extends React.Component {
     this.setState({
       currNum: currNum
     })
-    if (window.TogetherJS.running) {
+    if (!this.props.testEnv && window.TogetherJS.running) {
       window.TogetherJS.send({
         type: 'turnUpdate',
         currNum: currNum
@@ -53,6 +53,7 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.testEnv) return;
     window.TogetherJS.hub.on('headerRefresh', msg => {
       if (!msg.sameUrl) return;
       this.setState( {

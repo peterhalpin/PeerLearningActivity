@@ -4,7 +4,7 @@ import './qaPanel.css';
 class QaPanel extends React.Component {
   render() {
       return(
-        <iframe className='googleForm' title='Peer Learning Activity' src="https://docs.google.com/forms/d/e/1FAIpQLSfHF_EJAfLIodzHOImewciEIAJomAsrKbXvYDRu27n6DyMtaQ/viewform?embedded=true" width="640" height="200" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
+        <iframe data-testid="QaPanel" className='googleForm' title='Peer Learning Activity' src="https://docs.google.com/forms/d/e/1FAIpQLSfHF_EJAfLIodzHOImewciEIAJomAsrKbXvYDRu27n6DyMtaQ/viewform?embedded=true" width="640" height="200" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
       )
   }
 }
