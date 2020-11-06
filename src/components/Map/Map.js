@@ -207,9 +207,6 @@ class Map extends React.Component {
       });
     });
 
-    this.map.on('styledata', function() {
-      console.log('A styledata event occurred.');
-    });
 
   }
   componentDidUpdate(prevProps) {
@@ -223,7 +220,7 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div>
+      <div data-testid="Map">
         <div ref={el => this.mapContainer = el} className="mapContainer" />
       </div>
     )

@@ -45,7 +45,7 @@ class RadioButtonPanel extends React.Component {
 
     render() {
         return(
-            <div ref={(childComponent) => {window.radioButtonComponent = childComponent}} className="ui raised segment compact radioPanel">
+            <div ref={(childComponent) => {window.radioButtonComponent = childComponent}} className="ui raised segment compact radioPanel" data-testid='RadioButton'>
                 <div className="ui form">
                     <div className="grouped fields">
                         {RadioButton(this.headings, this.state.checkedButton, this.handleChange)}

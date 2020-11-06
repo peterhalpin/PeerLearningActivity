@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { statesData, dataCollect } from '../components/Map/us-states.js';
-let headings = [];
-let dataObject;
+export var headings = [];
+export var dataObject = [];
 export var organizedObject = {};
 
 export const renderData = async function(){

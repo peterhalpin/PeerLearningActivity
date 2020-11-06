@@ -6,7 +6,7 @@ import {mapIntToDate} from '../../utils/data.js';
 class DataDisplay extends React.Component {
     render() {
         return(
-            <div className="ui raised segment compact dataDisplay">
+            <div className="ui raised segment compact dataDisplay" data-testid="DataDisplay">
                 <p><span className='capitalize'>{this.props.selectedDataType}</span> in {this.props.selectedState} on {mapIntToDate(this.props.selectedDate)}:</p>
                 <p className='dataDisplayValue'>{this.props.currentData}</p>
                 <Button onClick={this.props.sendData}>Send</Button>
