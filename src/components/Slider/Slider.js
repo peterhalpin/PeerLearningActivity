@@ -28,7 +28,7 @@ class Slider extends React.Component {
   render(){
       return(
         <div className="ui raised segment compact sliderContainer">
-          <input type="range" min="1" max={getDateRange()} value={this.props.selectedDate} className="slider" id="dateSlider" onChange={this.handleChange} />
+          <input type="range" min="1" max={getDateRange()} value={this.props.selectedDate} className="slider" data-testid="Slider" id="dateSlider" onChange={this.handleChange} />
           <p id='displayValue'>Date: {mapIntToDate(this.props.selectedDate)}</p>
         </div>
       )
