@@ -28,7 +28,7 @@ class LogTable extends React.Component {
       currItem: undefined
     })
     // together JS running update
-    if (window.TogetherJS.running) {
+    if (!this.props.testEnv && window.TogetherJS.running) {
       window.TogetherJS.send({
         type: 'logTableUpdate',
         log: currList
@@ -43,6 +43,7 @@ class LogTable extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.testEnv) return;
     window.TogetherJS.hub.on('logTableUpdate', msg => {
       if (!msg.sameUrl) return;
       this.setState({ items: msg.log });
