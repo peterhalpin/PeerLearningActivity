@@ -19,6 +19,7 @@ class DataPanels extends React.Component {
               currentData={this.props.currentData} 
               selectedDataType={this.props.selectedDataType} 
               selectedState={this.props.selectedState}
+              sendData={this.props.sendData}
             />
           </div>
 
