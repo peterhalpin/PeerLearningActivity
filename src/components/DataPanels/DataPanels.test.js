@@ -87,7 +87,7 @@ const testRadioToDataDisplay = (buttonName, displayName) => {
 }
 const testSliderToDataDisplay = (sliderDateInt, displayDate) => {
     //const radio = screen.getByDisplayValue(buttonName);
-	const slider = screen.getByTestId('Slider');
+	const slider = screen.getByTestId('SliderInput');
 	const state = 'Alabama';
 	//const dateKey = '2/4/2020';
 	fireEvent.change(slider, { target: { value: sliderDateInt} });
