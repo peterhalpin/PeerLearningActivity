@@ -2,17 +2,29 @@ import React from 'react';
 import { render, screen, wait, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import DataPanels from './DataPanels';
+import MapAndDataContainer from '../MapAndDataContainer/MapAndDataContainer.js';
 import { getDefaultDateInt, mapIntToDate, renderData, organizedObject } from '../../utils/data.js';
 
 //jest.mock('../../utils/data.js');
 
+jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
+  GeolocateControl: jest.fn(),
+  Map: jest.fn(() => ({
+    addControl: jest.fn(),
+    on: jest.fn(),
+    remove: jest.fn(),
+  })),
+  NavigationControl: jest.fn(),
+}));
+
 describe('<DataPanels />', () => {
-  beforeAll(async (done) => {
-  	renderData();
-	done();
-  });
+//  beforeAll(async (done) => {
+//  	await renderData();
+//	done();
+//  });
   test('it should mount', () => {
-	render(<DataPanels testEnv="true"/>);
+	//render(<DataPanels testEnv="true"/>);
+	render(<MapAndDataContainer testEnv='true'/>);
 	const dataPanels = screen.getByTestId('DataPanels');
 	expect(dataPanels).toBeInTheDocument();
   });
