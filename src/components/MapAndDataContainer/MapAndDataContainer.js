@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from 'semantic-ui-react';
 import './MapAndDataContainer.css';
 import Map from '../Map/Map.js';
-import DataPanels from '../dataPanels/dataPanels.js';
+import DataPanels from '../DataPanels/DataPanels.js';
 import {getDefaultHeading, getDefaultDateInt, mapIntToDate, organizedObject} from '../../utils/data.js';
 
 class MapAndDataContainer extends React.Component {
@@ -107,7 +107,7 @@ class MapAndDataContainer extends React.Component {
   }
   render() {
     return(
-      <Container>
+      <Container data-testid='MapAndDataContainer'>
         <DataPanels 
           updateLayer={this.updateLayer}
           changeDataType={this.changeDataType}
