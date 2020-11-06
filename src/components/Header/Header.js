@@ -28,11 +28,42 @@ class Header extends React.Component {
       numOfUser: names.length
     });
     console.log(names);
+    // together JS running update
+    if (window.TogetherJS.running) {
+      window.TogetherJS.send({
+        type: 'headerRefresh',
+        users: names,
+        numOfUser: names.length,
+      })
+    }
   }
 
   endTurn() { 
+    const currNum = (this.state.currNum+1) % this.state.numOfUser;
     this.setState({
-      currNum: (this.state.currNum+1) % this.state.numOfUser
+      currNum: currNum
+    })
+    if (window.TogetherJS.running) {
+      window.TogetherJS.send({
+        type: 'turnUpdate',
+        currNum: currNum
+      })
+    }
+  }
+
+  componentDidMount() {
+    window.TogetherJS.hub.on('headerRefresh', msg => {
+      if (!msg.sameUrl) return;
+      this.setState( {
+        users: msg.users,
+        numOfUser: msg.numOfUser,
+      });
+    });
+    window.TogetherJS.hub.on('turnUpdate', msg => {
+      if (!msg.sameUrl) return;
+      this.setState( {
+        currNum: msg.currNum
+      });
     })
   }
 
