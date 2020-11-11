@@ -3,13 +3,14 @@ import { Grid, Segment, Button} from 'semantic-ui-react';
 import LogTable from '../logTable/logTable.js'
 import './LogTableContainer.css';
 
+const numOfLogs = 3;
 
 class LogTableContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state={
 			activeIndex: 0,
-			length: 3,
+			length: numOfLogs,
 			infos: []
     }
 		this.goToPrevTable = this.goToPrevTable.bind(this);
@@ -55,7 +56,7 @@ class LogTableContainer extends React.Component {
 
   componentWillMount() {
 		var infoList = [];
-		for(let i = 0; i < 3; i++) {
+		for(let i = 0; i < numOfLogs; i++) {
 			infoList.push({
 				items: [],
 				currItem: undefined
@@ -112,7 +113,6 @@ class LogTableContainer extends React.Component {
 						handleFormChange={this.handleFormChange}
 						currItem={this.state.infos[this.state.activeIndex].currItem}
 						items={this.state.infos[this.state.activeIndex].items}
-						
 					/>
 					<Button.Group widths='2'>
 						<Button onClick={() => this.goToPrevTable()}>
