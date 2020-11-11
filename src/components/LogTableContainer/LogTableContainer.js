@@ -1,8 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Button} from 'semantic-ui-react';
 import LogTable from '../logTable/logTable.js'
-import LeftArrow from '../Arrows/LeftArrow.js'
-import RightArrow from '../Arrows/RightArrow.js'
 import './LogTableContainer.css';
 
 
@@ -13,6 +11,8 @@ class LogTableContainer extends React.Component {
 			activeIndex: 0,
 			length: 3
     }
+		this.goToPrevTable = this.goToPrevTable.bind(this);
+		this.goToNextTable = this.goToNextTable.bind(this);
   }
 
   receiveMapData(data) {
@@ -28,29 +28,31 @@ class LogTableContainer extends React.Component {
   }
 
 	goToPrevTable() {
-    let index = this.state.activeIndex;
-    let length = this.state.length;
-		if(index < 1) {
-      index = length - 1;
-    } else {
-      index--;
-    }
-		this.setState({
-      activeIndex: index
-    });
+		console.log('prev');
+    // let index = this.state.activeIndex;
+    // let length = this.state.length;
+		// if(index < 1) {
+    //   index = length - 1;
+    // } else {
+    //   index--;
+    // }
+		// this.setState({
+    //   activeIndex: index
+    // });
   }
 
 	goToNextTable() {
-    let index = this.state.activeIndex;
-    let length = this.state.length;
-	  if(index === length - 1) {
-      index = 0
-    } else {
-      index++;
-    }
-		this.setState({
-      activeIndex: index
-    });
+		console.log('next');
+    // let index = this.state.activeIndex;
+    // let length = this.state.length;
+	  // if(index === length - 1) {
+    //   index = 0
+    // } else {
+    //   index++;
+    // }
+		// this.setState({
+    //   activeIndex: index
+    // });
   }
 
   render() {
@@ -59,10 +61,10 @@ class LogTableContainer extends React.Component {
 				<Segment>
 						<LogTable ref={ref => this.child=ref} />
 					<Button.Group widths='2'>
-						<Button >
+						<Button onClick={() => this.goToPrevTable()}>
 							<i className="caret left icon"></i> 
 						</Button>
-						<Button >
+						<Button onClick={() => this.goToNextTable()}>
 							<i className="caret right icon"></i> 
 						</Button>
 					</Button.Group>
