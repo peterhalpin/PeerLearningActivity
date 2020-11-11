@@ -18,36 +18,31 @@ class LogTable extends React.Component {
     this.setState({
       currItem: e.target.value 
     });
+		this.props.handleFormChange(e);
     
   }
 
   handleSubmit() {
-    const currList = this.state.items.concat(this.state.currItem);
+		this.props.handleSubmit();
     this.setState({
-      items: currList,
       currItem: undefined
     })
-    // together JS running update
-    if (!this.props.testEnv && window.TogetherJS.running) {
-      window.TogetherJS.send({
-        type: 'logTableUpdate',
-        log: currList
-      });
-    }
+    // // together JS running update
+    // if (!this.props.testEnv && window.TogetherJS.running) {
+    //   window.TogetherJS.send({
+    //     type: 'logTableUpdate',
+    //     log: currList
+    //   });
+    // }
   }
 
-  receiveMapData(data) {
-    this.setState({
-      currItem: data
-    }, this.handleSubmit);
-  }
 
   componentDidMount() {
-    if (this.props.testEnv) return;
-    window.TogetherJS.hub.on('logTableUpdate', msg => {
-      if (!msg.sameUrl) return;
-      this.setState({ items: msg.log });
-    });
+    // if (this.props.testEnv) return;
+    // window.TogetherJS.hub.on('logTableUpdate', msg => {
+    //   if (!msg.sameUrl) return;
+    //   this.setState({ items: msg.log });
+    // });
   }
 
   render() {
@@ -55,12 +50,12 @@ class LogTable extends React.Component {
       <div className="LogTable" data-testid="logTable">
           <p>Student log</p>
             <Form >
-              <Form.Input placeholder='put your data log here' onChange={this.handleFormChange} value={typeof this.state.currItem === 'string' ? this.state.currItem : '' }/>
+              <Form.Input placeholder='put your data log here' onChange={this.handleFormChange} value={typeof this.state.currItem === 'string' ? this.props.currItem : '' }/>
               <Button onClick={this.handleSubmit}>Submit</Button>
             </Form>
 
           <List divided verticalAlign='middle'>
-            {this.state.items.map((item) => {
+            {this.props.items.map((item) => {
               if(item) {
                 if(typeof item === 'string') {
                   return <List.Item>{item}</List.Item>
