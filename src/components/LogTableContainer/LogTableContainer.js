@@ -37,13 +37,13 @@ class LogTableContainer extends React.Component {
 		this.setState({
 			infos: infoList
 		});
-    // // together JS running update
-    // if (!this.props.testEnv && window.TogetherJS.running) {
-    //   window.TogetherJS.send({
-    //     type: 'logTableUpdate',
-    //     log: currList
-    //   });
-    // }
+    // together JS running update
+    if (!this.props.testEnv && window.TogetherJS.running) {
+      window.TogetherJS.send({
+        type: 'logTableUpdate',
+        log: currList
+      });
+    }
   }
 
   receiveMapData(data) {
@@ -65,11 +65,18 @@ class LogTableContainer extends React.Component {
 		this.setState({
 			infos: infoList
 		});
-    // if (this.props.testEnv) return;
-    // window.TogetherJS.hub.on('logTableUpdate', msg => {
-    //   if (!msg.sameUrl) return;
-    //   this.setState({ items: msg.log });
-    // });
+    if (this.props.testEnv) return;
+		// register TogetherJS handlers
+    window.TogetherJS.hub.on('logTableUpdate', msg => {
+      if (!msg.sameUrl) return;
+			var infoList = this.state.infos;
+			infoList[this.state.activeIndex].items = msg.log;
+      this.setState({ infos: infoList });
+    });
+    window.TogetherJS.hub.on('activeIndexUpdate', msg => {
+      if (!msg.sameUrl) return;
+      this.setState({ activeIndex: msg.index });
+    });
   }
 
 	goToPrevTable() {
@@ -85,6 +92,13 @@ class LogTableContainer extends React.Component {
 		this.setState({
       activeIndex: index
     });
+    // together JS running update
+    if (!this.props.testEnv && window.TogetherJS.running) {
+      window.TogetherJS.send({
+        type: 'activeIndexUpdate',
+        index: index
+      });
+    }
   }
 
 	goToNextTable() {
@@ -100,6 +114,13 @@ class LogTableContainer extends React.Component {
 		this.setState({
       activeIndex: index
     });
+    // together JS running update
+    if (!this.props.testEnv && window.TogetherJS.running) {
+      window.TogetherJS.send({
+        type: 'activeIndexUpdate',
+        index: index
+      });
+    }
   }
 
   render() {
