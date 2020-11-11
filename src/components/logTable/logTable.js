@@ -53,7 +53,6 @@ class LogTable extends React.Component {
   render() {
     return(
       <div className="LogTable" data-testid="logTable">
-        <div className="ui segment raised">
           <p>Student log</p>
             <Form >
               <Form.Input placeholder='put your data log here' onChange={this.handleFormChange} value={typeof this.state.currItem === 'string' ? this.state.currItem : '' }/>
@@ -72,7 +71,6 @@ class LogTable extends React.Component {
               return null;
             })}
           </List>
-        </div>
       </div>
     )
   }

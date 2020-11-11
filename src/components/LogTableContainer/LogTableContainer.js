@@ -1,26 +1,18 @@
 import React from 'react';
-// import { List, Form, Button } from 'semantic-ui-react';
-import { Container } from 'semantic-ui-react';
-// import { mapIntToDate } from '../../utils/data.js'
+import { Grid, Segment, Button} from 'semantic-ui-react';
 import LogTable from '../logTable/logTable.js'
+import LeftArrow from '../Arrows/LeftArrow.js'
+import RightArrow from '../Arrows/RightArrow.js'
+import './LogTableContainer.css';
+
 
 class LogTableContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      items: [],
-      currItem: undefined
+			activeIndex: 0,
+			length: 3
     }
-    this.handleFormChange = this.handleFormChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleFormChange(e) {
-		this.child.handleFormChange(e);
-  }
-
-  handleSubmit() {
-		this.child.handleSubmit();
   }
 
   receiveMapData(data) {
@@ -35,11 +27,47 @@ class LogTableContainer extends React.Component {
     // });
   }
 
+	goToPrevTable() {
+    let index = this.state.activeIndex;
+    let length = this.state.length;
+		if(index < 1) {
+      index = length - 1;
+    } else {
+      index--;
+    }
+		this.setState({
+      activeIndex: index
+    });
+  }
+
+	goToNextTable() {
+    let index = this.state.activeIndex;
+    let length = this.state.length;
+	  if(index === length - 1) {
+      index = 0
+    } else {
+      index++;
+    }
+		this.setState({
+      activeIndex: index
+    });
+  }
+
   render() {
     return(
-			<Container>
-				<LogTable ref={ref => this.child=ref} />
-			</Container>
+			<div className='ui raised LogTableContainer'>
+				<Segment>
+						<LogTable ref={ref => this.child=ref} />
+					<Button.Group widths='2'>
+						<Button >
+							<i className="caret left icon"></i> 
+						</Button>
+						<Button >
+							<i className="caret right icon"></i> 
+						</Button>
+					</Button.Group>
+				</Segment>
+			</div>
     )
   }
 }
