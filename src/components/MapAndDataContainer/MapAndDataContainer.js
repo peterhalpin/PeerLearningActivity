@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import './MapAndDataContainer.css';
 import Map from '../Map/Map.js';
 import DataPanels from '../DataPanels/DataPanels.js';
-import {getDefaultHeading, getDefaultDateInt, mapIntToDate, organizedObject} from '../../utils/data.js';
+import {getDefaultHeading, getDefaultDateInt, mapIntToDate, organizedObject, getDateRange} from '../../utils/data.js';
 
 class MapAndDataContainer extends React.Component {
   constructor(props) {
@@ -44,19 +44,13 @@ class MapAndDataContainer extends React.Component {
 
   refreshData() {
     if(organizedObject) {
-      // console.log(this.state.selectedState);
       let dataForState = organizedObject[this.state.selectedState];
       if(dataForState) {
-      // console.log(dataForState);
-      // console.log(this.state.selectedDataType);
         let destylizedType = this.state.selectedDataType.toString().replace(' ', '_');
         let dataForType = dataForState[destylizedType];
         if(dataForType) {
-      // console.log(dataForType);
-      // console.log(this.state.selectedDate);
           let dataForDate = dataForType[mapIntToDate(this.state.selectedDate)];
           this.changeCurrentData(dataForDate);
-          console.log(this.state.currentData);
         }
       }
     }
@@ -121,6 +115,7 @@ class MapAndDataContainer extends React.Component {
           currentData={this.state.currentData} 
           selectedDataType={this.state.selectedDataType} 
           selectedState={this.state.selectedState}
+          dateRange={getDateRange()}
         />
         <Map 
           ref={ref => (this.childMap = ref)}  

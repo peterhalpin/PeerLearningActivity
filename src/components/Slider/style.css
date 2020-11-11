@@ -3,6 +3,10 @@
     position: absolute;
     background-color: #7BAFD4;
 }
+
+.sliderInput {
+  display: flex;
+}
   
   /* The slider itself */
   .slider {

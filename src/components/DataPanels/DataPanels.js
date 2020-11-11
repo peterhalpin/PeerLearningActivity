@@ -12,6 +12,7 @@ class DataPanels extends React.Component {
             <Slider 
               selectedDate={this.props.selectedDate}
               changeSelectedDate={this.props.changeSelectedDate}
+              dateRange={this.props.dateRange}
             />
             <RadioButtonPanel changeDataType={this.props.changeDataType}/>
             <DataDisplay 
