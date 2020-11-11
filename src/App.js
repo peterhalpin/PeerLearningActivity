@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import { Container } from 'semantic-ui-react';
 import HelpButton from './components/help/HelpButton.js';
-import LogTable from './components/logTable/logTable.js';
+// import LogTable from './components/logTable/logTable.js';
+import LogTableContainer from './components/LogTableContainer/LogTableContainer.js';
 import MapAndDataContainer from './components/MapAndDataContainer/MapAndDataContainer.js';
 import Header from './components/Header/Header.js';
 import LandingPage from './components/LandingPage/LandingPage.js';
@@ -33,7 +34,7 @@ class App extends React.Component {
           <HelpButton />
           <Container>
             <Header />
-            <LogTable ref={ref => this.childLogTable = ref}/>
+            <LogTableContainer ref={ref => this.childLogTable = ref}/>
             <QaPanel/>
             <MapAndDataContainer sendMapData={this.sendMapData} />
           </Container>
