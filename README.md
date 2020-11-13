@@ -83,7 +83,7 @@ Caroline Parslow <cparslow@unc.edu> [Github](https://github.com/carolinepar)
 
 
 
-## 7.
+## 7. License
 GPLv3
 
 
