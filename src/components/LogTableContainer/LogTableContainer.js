@@ -17,6 +17,7 @@ class LogTableContainer extends React.Component {
 		this.goToNextTable = this.goToNextTable.bind(this);
 		this.handleFormChange = this.handleFormChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+    this.undo = this.undo.bind(this);
 		this.receiveMapData = this.receiveMapData.bind(this);
   }
 
@@ -32,13 +33,37 @@ class LogTableContainer extends React.Component {
 		var infoList = this.state.infos;
 		var info = infoList[this.state.activeIndex];
 
-		const currList = info.items.concat(info.currItem);
+		if (info.currItem) {
+			const currList = info.items.concat(info.currItem);
+			infoList[this.state.activeIndex].items = currList;
+			infoList[this.state.activeIndex].currItem = undefined;
+			this.setState({
+				infos: infoList
+			});
+	    // together JS running update
+	    if (!this.props.testEnv && window.TogetherJS.running) {
+	      window.TogetherJS.send({
+	        type: 'logTableUpdate',
+	        log: currList
+	      });
+	    }
+		}
+  }
+
+  undo() {
+    // undo the previous log, do we need to switch user then?
+		var infoList = this.state.infos;
+		var info = infoList[this.state.activeIndex];
+    var currList = info.items;
+    currList.pop();
 		infoList[this.state.activeIndex].items = currList;
 		this.setState({
 			infos: infoList
 		});
-    // together JS running update
-    if (!this.props.testEnv && window.TogetherJS.running) {
+
+    console.log(currList);
+
+    if (!this.props.testEnv  && window.TogetherJS.running) {
       window.TogetherJS.send({
         type: 'logTableUpdate',
         log: currList
@@ -132,6 +157,8 @@ class LogTableContainer extends React.Component {
 					<LogTable 
 						handleSubmit={this.handleSubmit}
 						handleFormChange={this.handleFormChange}
+						endTurn={this.props.endTurn}
+						undo={this.undo}
 						currItem={this.state.infos[this.state.activeIndex].currItem}
 						items={this.state.infos[this.state.activeIndex].items}
 						activeIndex={this.state.activeIndex}

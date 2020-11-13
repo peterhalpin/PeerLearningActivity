@@ -74,7 +74,7 @@ class Header extends React.Component {
       <div className="Header" data-testid="Header">
         <div className="ui raised segment Header">
           <p>It's {this.state.users[this.state.currNum]}'s turn</p>
-          <button className="ui button" onClick={() => this.endTurn() }>End Turn</button>
+          <button className="ui button" onClick={() => this.endTurn() }>Skip Turn</button>
           <button className="ui button" onClick={() => this.loadPeers() }>Refresh</button>
         </div>
       </div>

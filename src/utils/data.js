@@ -92,12 +92,12 @@ export const loadDataIntoGeoJSON = function() {
       const currentDate = dateObj.getDate() + 1;
       const currentYear = dateObj.getFullYear();
       const date = currentMonth + '/' + currentDate + '/' + currentYear;
-      const deaths = parseFloat(entry.deaths);
-      const totalDeaths = parseFloat(entry.total_deaths);
-      const tests = parseFloat(entry.tests);
-      const totalTests = parseFloat(entry.total_tests);
-      const infections = parseFloat(entry.infections);
-      const totalInfections = parseFloat(entry.total_infections);
+      const deaths = Math.floor(parseFloat(entry.deaths));
+      const totalDeaths = Math.floor(parseFloat(entry.total_deaths));
+      const tests = Math.floor(parseFloat(entry.tests));
+      const totalTests = Math.floor(parseFloat(entry.total_tests));
+      const infections = Math.floor(parseFloat(entry.infections));
+      const totalInfections = Math.floor(parseFloat(entry.total_infections));
       if (!organizedObject[stateName]) {
         organizedObject[stateName] = {
           deaths: {},

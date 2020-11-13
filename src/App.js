@@ -17,6 +17,7 @@ class App extends React.Component {
     }
     this.handleClick = this.handleClick.bind(this);
     this.sendMapData = this.sendMapData.bind(this);
+    this.endTurn = this.endTurn.bind(this);
   }
 
   handleClick() {
@@ -25,15 +26,22 @@ class App extends React.Component {
 
   sendMapData(data) {
     this.childLogTable.receiveMapData(data)
+    this.endTurn();
   }
+
+  endTurn() {
+    console.log("in endTurn function at App.js");
+    this.childHeader.endTurn()
+  }
+
   render(){
     if(this.state.hasBegun){
       return (
         <React.Fragment>
           <HelpButton />
           <Container>
-            <Header />
-            <LogTableContainer ref={ref => this.childLogTable = ref}/>
+            <Header ref={ref => this.childHeader = ref} />
+            <LogTableContainer ref={ref => this.childLogTable = ref} endTurn={this.endTurn}/>
             <QaPanel/>
             <MapAndDataContainer sendMapData={this.sendMapData} />
           </Container>

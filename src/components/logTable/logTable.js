@@ -36,7 +36,8 @@ class LogTable extends React.Component {
           <p>Student log {this.props.activeIndex}</p>
             <Form >
               <Form.Input placeholder='put your data log here' onChange={this.handleFormChange} value={typeof this.state.currItem === 'string' ? this.props.currItem : '' }/>
-              <Button onClick={this.handleSubmit}>Submit</Button>
+              <Button onClick={() => {this.handleSubmit(); this.props.endTurn()}}>Submit</Button>
+              <Button onClick={this.props.undo}>Undo</Button>
             </Form>
 
           <List divided verticalAlign='middle'>
