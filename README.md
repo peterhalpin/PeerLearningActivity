@@ -1,6 +1,3 @@
-
-
-
 # Peer Learning Activity 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![coverage](https://img.shields.io/badge/coverage-48%25-brightgreen)    
@@ -47,9 +44,14 @@ About how to host your own hub, please refer to [Instructions provided by Togeth
 
 
 ## 4.
-cp
+Technologies used:
+* ReactJS
+* TogetherJS
+* JavaScript
+* Semantic UI
+* Netlify + FaunaDB
 
-
+The ADRs can be found in ADRs.md
 
 ## 5. Contributing
 1. New developers need access to these:
@@ -92,7 +94,7 @@ GPLv3
 
 
 ## 8.
-cp
+We'd like to thank Perter Halpin for coming up with some a great project idea and for being so flexibile and interested in our input. We'd also like to thank Rodger Blair for his guidance and advice throughout the process. Lastly, we'd like to thank Dr. Jefferey Terrel for teaching us the process of developing software for a client.
 
 
 
