@@ -56,8 +56,10 @@ Related configurations can be found in the file generate-react-cli.json.
 
 
 
-## 6.
-ll
+## 6. Authors
+Larry Li <ruochen@live.unc.edu> [Github](https://github.com/liruochen1998)
+Xinzhao Li <xinzhaox@live.unc.edu> [Github](https://github.com/Jaega)
+Caroline Parslow <cparslow@unc.edu> [Github](https://github.com/carolinepar)
 
 
 
