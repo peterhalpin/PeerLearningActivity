@@ -70,12 +70,6 @@ The ADRs can be found in ADRs.md
 
     , in which "MyComponent" is the name of your choice. This will generate the .js file, .css file, and testing file together for the component.
 Related configurations can be found in the file generate-react-cli.json.
-    1. To generate test coverage report, run
-    ```
-    CI=true npm test -- --env=jsdom --coverage
-    ```
-
-    , as specified in package.json.
 
 1. Link to project website: https://tarheels.live/comp523peerlearning/
 
