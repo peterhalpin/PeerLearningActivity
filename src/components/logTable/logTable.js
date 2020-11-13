@@ -33,7 +33,7 @@ class LogTable extends React.Component {
   render() {
     return(
       <div className="LogTable" data-testid="logTable">
-          <p>Student log</p>
+          <p>Student log {this.props.activeIndex}</p>
             <Form >
               <Form.Input placeholder='put your data log here' onChange={this.handleFormChange} value={typeof this.state.currItem === 'string' ? this.props.currItem : '' }/>
               <Button onClick={this.handleSubmit}>Submit</Button>

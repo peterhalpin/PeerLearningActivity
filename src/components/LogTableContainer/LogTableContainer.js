@@ -134,6 +134,7 @@ class LogTableContainer extends React.Component {
 						handleFormChange={this.handleFormChange}
 						currItem={this.state.infos[this.state.activeIndex].currItem}
 						items={this.state.infos[this.state.activeIndex].items}
+						activeIndex={this.state.activeIndex}
 					/>
 					<Button.Group widths='2'>
 						<Button onClick={() => this.goToPrevTable()}>
