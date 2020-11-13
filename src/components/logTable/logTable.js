@@ -27,23 +27,8 @@ class LogTable extends React.Component {
     this.setState({
       currItem: undefined
     })
-    // // together JS running update
-    // if (!this.props.testEnv && window.TogetherJS.running) {
-    //   window.TogetherJS.send({
-    //     type: 'logTableUpdate',
-    //     log: currList
-    //   });
-    // }
   }
 
-
-  componentDidMount() {
-    // if (this.props.testEnv) return;
-    // window.TogetherJS.hub.on('logTableUpdate', msg => {
-    //   if (!msg.sameUrl) return;
-    //   this.setState({ items: msg.log });
-    // });
-  }
 
   render() {
     return(
