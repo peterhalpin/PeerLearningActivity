@@ -3,7 +3,7 @@
 
 # Peer Learning Activity 
 
-![](https://img.shields.io/badge/coverage-48%-brightgreen)    
+![coverage](https://img.shields.io/badge/coverage-48%-brightgreen)    
 Develop by Caroline Parslow, Xinzhao Li, Larry Li for Dr. Peter Halpin at UNC-Chapel Hill.
 
 
