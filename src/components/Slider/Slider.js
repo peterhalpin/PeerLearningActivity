@@ -19,15 +19,13 @@ class Slider extends React.Component {
     return this.props.selectedDate;
   }
 
-  handleLeftArrowClick(arrowir){
-    let value = document.getElementById('dateSlider').value - 1;
-
+  handleLeftArrowClick(){
+    let value = parseInt(document.getElementById('dateSlider').value) - 1;
     this.handleChange({target:{value}});
   }
 
   handleRightArrowClick(){
-    let value = document.getElementById('dateSlider').value + 1;
-
+    let value = parseInt(document.getElementById('dateSlider').value) + 1;
     this.handleChange({target:{value}});
   }
 
