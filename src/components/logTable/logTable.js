@@ -12,74 +12,36 @@ class LogTable extends React.Component {
     }
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.undo = this.undo.bind(this);
   }
 
   handleFormChange(e) {
     this.setState({
       currItem: e.target.value 
     });
+		this.props.handleFormChange(e);
     
   }
 
   handleSubmit() {
-    const currList = this.state.items.concat(this.state.currItem);
+		this.props.handleSubmit();
     this.setState({
-      items: currList,
       currItem: undefined
     })
-    // together JS running update
-    if (!this.props.testEnv && window.TogetherJS.running) {
-      window.TogetherJS.send({
-        type: 'logTableUpdate',
-        log: currList
-      });
-    }
   }
 
-  receiveMapData(data) {
-    this.setState({
-      currItem: data
-    }, this.handleSubmit);
-  }
-
-  undo() {
-    // undo the previous log, do we need to switch user then?
-    var currList = this.state.items;
-    currList.pop();
-    this.setState({
-      items:currList 
-    });
-    console.log(currList);
-    if (!this.props.testEnv  && window.TogetherJS.running) {
-      window.TogetherJS.send({
-        type: 'logTableUpdate',
-        log: currList
-      });
-    }
-  }
-
-  componentDidMount() {
-    if (this.props.testEnv) return;
-    window.TogetherJS.hub.on('logTableUpdate', msg => {
-      if (!msg.sameUrl) return;
-      this.setState({ items: msg.log });
-    });
-  }
 
   render() {
     return(
       <div className="LogTable" data-testid="logTable">
-        <div className="ui segment raised">
-          <p>Student log</p>
+          <p>Student log {this.props.activeIndex}</p>
             <Form >
-              <Form.Input placeholder='put your data log here' onChange={this.handleFormChange} value={typeof this.state.currItem === 'string' ? this.state.currItem : '' }/>
+              <Form.Input placeholder='put your data log here' onChange={this.handleFormChange} value={typeof this.state.currItem === 'string' ? this.props.currItem : '' }/>
               <Button onClick={() => {this.handleSubmit(); this.props.endTurn()}}>Submit</Button>
-              <Button onClick={this.undo}>Undo</Button>
+              <Button onClick={this.props.undo}>Undo</Button>
             </Form>
 
           <List divided verticalAlign='middle'>
-            {this.state.items.map((item) => {
+            {this.props.items.map((item) => {
               if(item) {
                 if(typeof item === 'string') {
                   return <List.Item>{item}</List.Item>
@@ -90,7 +52,6 @@ class LogTable extends React.Component {
               return null;
             })}
           </List>
-        </div>
       </div>
     )
   }
