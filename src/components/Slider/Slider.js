@@ -1,19 +1,17 @@
 import React from 'react';
 import './style.css';
-import {getDateRange, getDefaultDateInt, mapIntToDate} from '../../utils/data.js';
+import { mapIntToDate } from '../../utils/data.js';
 
 class Slider extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.state= {
-    //   dateValue: getDefaultDateInt()
-    // }
     this.handleChange = this.handleChange.bind(this);
+    this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
+    this.handleRightArrowClick = this.handleRightArrowClick.bind(this);
   }
 
   handleChange(event) {
-    // this.setState({dateValue: event.target.value});
     this.props.changeSelectedDate(event.target.value);
   }
 
@@ -21,14 +19,25 @@ class Slider extends React.Component {
     return this.props.selectedDate;
   }
 
-  // componentDidMount(){
-  //   this.props.changeSelectedDate(this.state.dateValue);
-  // }
+  handleLeftArrowClick(){
+    let value = parseInt(document.getElementById('dateSlider').value) - 1;
+    this.handleChange({target:{value}});
+  }
+
+  handleRightArrowClick(){
+    let value = parseInt(document.getElementById('dateSlider').value) + 1;
+    this.handleChange({target:{value}});
+  }
 
   render(){
+    console.log(this.props.dateRange);
       return(
         <div className="ui raised segment compact sliderContainer" data-testid="Slider">
-          <input data-testid="SliderInput" type="range" min="1" max={this.props.dateRange} value={this.props.selectedDate} className="slider" id="dateSlider" onChange={this.handleChange} />
+          <div className="sliderInput">
+            <i class="caret left icon" onClick={this.handleLeftArrowClick}></i>
+            <input data-testid="SliderInput" type="range" min="1" max={this.props.dateRange} value={this.props.selectedDate} className="slider" id="dateSlider" onChange={this.handleChange} />
+            <i class="caret right icon" onClick={this.handleRightArrowClick}></i>
+          </div>
           <p id='displayValue'>Date: {mapIntToDate(this.props.selectedDate)}</p>
         </div>
       )

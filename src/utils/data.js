@@ -64,6 +64,7 @@ export const getMaxDate = function(){
 export const getDateRange = function(){
     let min = getMinDate();
     let max = getMaxDate();
+    console.log(min,max);
     const diffTime = Math.abs(max.date.getTime() - min.date.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
     return diffDays;
@@ -78,6 +79,9 @@ export const mapIntToDate = function(int){
 }
 
 export const getDefaultDateInt = function(){
+    console.log(getDateRange());
+    console.log(Math.floor(getDateRange()/2));
+    console.log(mapIntToDate(75));
     return Math.floor(getDateRange()/2);
 }
 
@@ -120,12 +124,9 @@ export const loadDataIntoGeoJSON = function() {
     const statesDataForType = { type:"FeatureCollection",features:[] };
     for (var feature of statesData.features) {
       const stateName = feature.properties.name;
-      console.log(stateName);
       const state = organizedObject[stateName]; 
-      // console.log(state);
       if (state) {
         const data = state[dataType];
-        // console.log(deaths);
         for (const date of Object.keys(data)) {
           const featureNew = JSON.parse(JSON.stringify(feature));
           featureNew.properties.date = date;
@@ -134,13 +135,7 @@ export const loadDataIntoGeoJSON = function() {
         }
 
       }
-      // console.log(statesDataDeath);
       dataCollect[dataType] = {...statesDataForType};
-      
-
     }
-
   }
-  console.log(dataCollect);
-  
 }
