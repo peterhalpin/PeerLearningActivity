@@ -3,8 +3,8 @@
 
 # Peer Learning Activity 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
 ![coverage](https://img.shields.io/badge/coverage-48%25-brightgreen)    
+
 Develop by Caroline Parslow, Xinzhao Li, Larry Li for Dr. Peter Halpin at UNC-Chapel Hill.
 
 
