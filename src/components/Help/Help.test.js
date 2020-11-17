@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import { render, screen } from "../QaPanel/node_modules/@testing-library/react";
+import "../QaPanel/node_modules/@testing-library/jest-dom/extend-expect";
 import HelpButton from "./HelpButton";
 
 describe("<help />", () => {
