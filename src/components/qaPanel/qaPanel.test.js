@@ -1,13 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
-import QaPanel from './qaPanel';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import QaPanel from "./QaPanel";
 
-describe('<qaPanel />', () => {
-  test('it should mount', () => {
+describe("<qaPanel />", () => {
+  test("it should mount", () => {
     render(<QaPanel />);
-    
-    const qaPanel = screen.getByTestId('QaPanel');
+
+    const qaPanel = screen.getByTestId("QaPanel");
 
     expect(qaPanel).toBeInTheDocument();
   });

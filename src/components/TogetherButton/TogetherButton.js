@@ -1,30 +1,35 @@
-import React from 'react';
-import './TogetherButton.css';
+import React from "react";
+import "./TogetherButton.css";
 
+// Note: this component is not currently being used anywhere since TogheterJS autostarts.
+// However, you can use this button to toggle TogetherJS if autostart is false
 class TogetherButton extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       togetherON: false,
-    }
+    };
   }
 
-  ToggleButton(){
+  ToggleButton() {
     this.setState({
-      togetherON: !this.state.togetherON
-    })
+      togetherON: !this.state.togetherON,
+    });
     window.TogetherJS(this);
     return false;
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
-        <button className="ui button TogetherButton" onClick={ () => this.ToggleButton() }>
+        <button
+          className="ui button TogetherButton"
+          onClick={() => this.ToggleButton()}
+        >
           <i className="handshake icon"></i>
         </button>
       </div>
-    )
+    );
   }
 }
 
