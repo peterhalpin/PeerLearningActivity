@@ -87,13 +87,18 @@ GPLv3
 
 
 
-## 8.
+## 8. Acknowledgement
 We'd like to thank Perter Halpin for coming up with some a great project idea and for being so flexibile and interested in our input. We'd also like to thank Rodger Blair for his guidance and advice throughout the process. Lastly, we'd like to thank Dr. Jefferey Terrel for teaching us the process of developing software for a client.
 
 
 
 
-## others
+## MISC. 
+### Stuctures of Code
+The entry point is `App.js` in  `./src`. Anything else can be found in `./src/components/*`. All the components follow the naming convention that inside `./src/components/MyComponent/`, we can find 3 files for most components (except Map) `MyComponent.js`, which is the main JS file, `MyComponent.css`, which is the css file, and `MyComponent.test.js`, which is the test file.    
+
+### Layout of Web UI
+The Layout of the Web UI can be changed by modifying the CSS file of each components. The CSS files are located inside the folder of each components.  
 
 
 
