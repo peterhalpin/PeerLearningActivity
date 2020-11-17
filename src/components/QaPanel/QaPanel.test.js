@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import QaPanel from "./qaPanel2";
+import QaPanel from "./QaPanel";
 
 describe("<qaPanel />", () => {
   test("it should mount", () => {
