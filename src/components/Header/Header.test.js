@@ -18,13 +18,13 @@ describe("<Header />", () => {
 
   test("end turn should work correctly", () => {
     render(<Header testEnv="true" />);
-    fireEvent.click(screen.getByText(/refresh/i));
+    fireEvent.click(screen.getByText(/Refresh/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user1's turn");
-    fireEvent.click(screen.getByText(/end turn/i));
+    fireEvent.click(screen.getByText(/skip turn/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user2's turn");
-    fireEvent.click(screen.getByText(/end turn/i));
+    fireEvent.click(screen.getByText(/skip turn/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user3's turn");
-    fireEvent.click(screen.getByText(/end turn/i));
+    fireEvent.click(screen.getByText(/skip turn/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user4's turn");
   });
 
@@ -32,13 +32,13 @@ describe("<Header />", () => {
     render(<Header testEnv="true" />);
     fireEvent.click(screen.getByText(/refresh/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user1's turn");
-    fireEvent.click(screen.getByText(/end turn/i));
+    fireEvent.click(screen.getByText(/skip turn/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user2's turn");
-    fireEvent.click(screen.getByText(/end turn/i));
+    fireEvent.click(screen.getByText(/skip turn/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user3's turn");
-    fireEvent.click(screen.getByText(/end turn/i));
+    fireEvent.click(screen.getByText(/skip turn/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user4's turn");
-    fireEvent.click(screen.getByText(/end turn/i));
+    fireEvent.click(screen.getByText(/skip turn/i));
     expect(screen.getByText(/It's/i)).toHaveTextContent("It's user1's turn");
   });
 });

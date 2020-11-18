@@ -3,12 +3,15 @@ import "./QaPanel.css";
 
 class QaPanel extends React.Component {
   render() {
+    // replace this variable with the correct google form link, more info in README. Copy the src and replace the variable down below.
+    const googleFormLink =
+      "https://docs.google.com/forms/d/e/1FAIpQLSfHF_EJAfLIodzHOImewciEIAJomAsrKbXvYDRu27n6DyMtaQ/viewform?embedded=true";
     return (
       <iframe
         data-testid="QaPanel"
         className="googleForm"
         title="Peer Learning Activity"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfHF_EJAfLIodzHOImewciEIAJomAsrKbXvYDRu27n6DyMtaQ/viewform?embedded=true"
+        src={googleFormLink}
         width="640"
         height="200"
         frameBorder="0"
@@ -20,7 +23,5 @@ class QaPanel extends React.Component {
     );
   }
 }
-
-//in the future, use className freebirdFormviewerComponentsQuestionBaseDescription and get the first character in the string to get the number of allowed items to log, then post message it up.
 
 export default QaPanel;

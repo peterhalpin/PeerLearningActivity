@@ -45,7 +45,7 @@ beforeAll(() => {
     },
   };
 });
+
 test("renders App", () => {
   const app = render(<App />);
-  //expect(app).toBeInTheDocument();
 });

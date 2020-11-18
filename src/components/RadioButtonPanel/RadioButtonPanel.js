@@ -38,11 +38,9 @@ class RadioButtonPanel extends React.Component {
 
   handleChange(event) {
     this.setState({ checkedButton: event.target.value });
-    // this.props.setData('selectedDataType', event.target.value);
     this.props.changeDataType(event.target.value);
   }
 
-  // call window.pageComponent.getCheckedButton() to get the checked button or:: window.radioButtonComponent.getCheckedButton()
   getCheckedButton() {
     return this.state.checkedButton;
   }

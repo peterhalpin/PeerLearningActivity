@@ -29,14 +29,13 @@ class Slider extends React.Component {
   }
 
   render() {
-    console.log(this.props.dateRange);
     return (
       <div
         className="ui raised segment compact sliderContainer"
         data-testid="Slider"
       >
         <div className="sliderInput">
-          <i class="caret left icon" onClick={this.handleLeftArrowClick}></i>
+          <i className="caret left icon" onClick={this.handleLeftArrowClick}></i>
           <input
             data-testid="SliderInput"
             type="range"
@@ -47,7 +46,7 @@ class Slider extends React.Component {
             id="dateSlider"
             onChange={this.handleChange}
           />
-          <i class="caret right icon" onClick={this.handleRightArrowClick}></i>
+          <i className="caret right icon" onClick={this.handleRightArrowClick}></i>
         </div>
         <p id="displayValue">Date: {mapIntToDate(this.props.selectedDate)}</p>
       </div>

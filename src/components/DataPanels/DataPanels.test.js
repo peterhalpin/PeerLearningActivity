@@ -9,6 +9,7 @@ import {
   organizedObject,
 } from "../../utils/data.js";
 
+// TODO: there's an error when running the test, but it doesn't affect the test to pass.
 jest.mock("mapbox-gl/dist/mapbox-gl", () => ({
   GeolocateControl: jest.fn(),
   Map: jest.fn(() => ({
@@ -81,18 +82,14 @@ const testRadioToDataDisplay = (buttonName, displayName) => {
   const data = getData(state, dateKey, buttonName);
   expect(screen.getByTestId("DataDisplay")).toHaveTextContent(state);
   expect(screen.getByTestId("DataDisplay")).toHaveTextContent(displayName);
-  //expect(screen.getByTestId("DataDisplay")).toHaveTextContent(dateKey);
   expect(screen.getByTestId("DataDisplay")).toHaveTextContent(data.toString());
 };
 
 const testSliderToDataDisplay = (sliderDateInt, displayDate) => {
-  //const radio = screen.getByDisplayValue(buttonName);
   const slider = screen.getByTestId("SliderInput");
   const state = "Alabama";
-  //const dateKey = '2/4/2020';
   fireEvent.change(slider, { target: { value: sliderDateInt } });
   const data = getData(state, displayDate, "deaths");
-  console.log("data: " + data);
   expect(screen.getByTestId("DataDisplay")).toHaveTextContent(state);
   expect(screen.getByTestId("DataDisplay")).toHaveTextContent(displayDate);
   expect(screen.getByTestId("DataDisplay")).toHaveTextContent(data.toString());
@@ -105,7 +102,6 @@ const getData = (state, date, type) => {
       let destylizedType = type.replace(" ", "_");
       let dataForType = dataForState[destylizedType];
       if (dataForType) {
-        console.log(date);
         let dataForDate = dataForType[date];
         return dataForDate;
       }

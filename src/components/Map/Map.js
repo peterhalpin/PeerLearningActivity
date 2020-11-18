@@ -28,7 +28,7 @@ const setEnum = function () {
       [enumValue]: { name: curr, layerId: curr },
     };
   });
-  enumDataLayerType = { ...dataLayerTypes }; //TODO: replace this weith dataLayerTypes everywhere since it's no longer enum
+  enumDataLayerType = { ...dataLayerTypes };
 };
 
 newPromise.then(setEnum).then(loadDataIntoGeoJSON);
@@ -64,6 +64,7 @@ class Map extends React.Component {
 
     // fill states with different colors based on their corresponding data in geojson file
     // fill states with different opacity based on whether the mouse is hovering or not
+    // TODO: change the numbers of color -- should match
     this.map.addLayer({
       id: layerId,
       source: dataId,
@@ -112,7 +113,6 @@ class Map extends React.Component {
       ["string", ["get", "date"]],
       mapIntToDate(this.props.selectedDate),
     ]);
-    console.log(layerId);
     this.finishLoadingMapStyle = true;
 
     // when hovering, turn on the hover state for current map feature and turn off the hover state for previous map feature (if any)
@@ -148,7 +148,6 @@ class Map extends React.Component {
         );
 
         if (this.props.onClickMap) {
-          console.log(e.features[0].properties.cases);
           this.props.onClickMap(
             e.features[0].properties.name,
             e.features[0].properties.cases
@@ -229,7 +228,6 @@ class Map extends React.Component {
       prevProps.selectedDate !== this.props.selectedDate &&
       this.finishLoadingMapStyle
     ) {
-      // console.log(this.props.selectedDate);
       Object.keys(enumDataLayerType).forEach((dataType) => {
         this.map.setFilter(dataType, [
           "==",

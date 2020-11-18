@@ -77,7 +77,6 @@ class MapAndDataContainer extends React.Component {
   }
 
   changeDataType(type) {
-    console.log("change data type");
     this.setData("selectedDataType", type, this.refreshData);
     const destylizedValue = type.replace(" ", "_");
     this.updateLayer(destylizedValue);
@@ -105,7 +104,6 @@ class MapAndDataContainer extends React.Component {
         if (!msg.sameUrl) return;
         const type = msg.dataType;
         const value = msg.dataValue;
-        // can potentially call setData, but I'm afraid that it will run into a circle
         this.setState({ [type]: [value] });
       });
     }

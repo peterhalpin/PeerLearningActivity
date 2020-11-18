@@ -29,7 +29,6 @@ class Header extends React.Component {
       users: names,
       numOfUser: names.length,
     });
-    console.log(names);
     // together JS running update
     if (!this.props.testEnv && window.TogetherJS.running) {
       window.TogetherJS.send({

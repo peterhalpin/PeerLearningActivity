@@ -3,15 +3,23 @@ import { Segment, Button } from "semantic-ui-react";
 import LogTable from "../LogTable/LogTable.js";
 import "./LogTableContainer.css";
 
+// Setting: change this to config the number of log tables
 const numOfLogs = 3;
 
 class LogTableContainer extends React.Component {
   constructor(props) {
     super(props);
+    var infoList = [];
+    for (let i = 0; i < numOfLogs; i++) {
+      infoList.push({
+        items: [],
+        currItem: undefined,
+      });
+    }
     this.state = {
       activeIndex: 0,
       length: numOfLogs,
-      infos: [],
+      infos: infoList,
     };
     this.goToPrevTable = this.goToPrevTable.bind(this);
     this.goToNextTable = this.goToNextTable.bind(this);
@@ -51,7 +59,7 @@ class LogTableContainer extends React.Component {
   }
 
   undo() {
-    // undo the previous log, do we need to switch user then?
+    // we can change whether to go back to the previous user if we UNDO here
     var infoList = this.state.infos;
     var info = infoList[this.state.activeIndex];
     var currList = info.items;
@@ -60,8 +68,6 @@ class LogTableContainer extends React.Component {
     this.setState({
       infos: infoList,
     });
-
-    console.log(currList);
 
     if (!this.props.testEnv && window.TogetherJS.running) {
       window.TogetherJS.send({
@@ -82,17 +88,7 @@ class LogTableContainer extends React.Component {
     );
   }
 
-  componentWillMount() {
-    var infoList = [];
-    for (let i = 0; i < numOfLogs; i++) {
-      infoList.push({
-        items: [],
-        currItem: undefined,
-      });
-    }
-    this.setState({
-      infos: infoList,
-    });
+  componentDidMount() {
     if (this.props.testEnv) return;
     // register TogetherJS handlers
     window.TogetherJS.hub.on("logTableUpdate", (msg) => {
@@ -108,7 +104,6 @@ class LogTableContainer extends React.Component {
   }
 
   goToPrevTable() {
-    console.log("prev");
     let index = this.state.activeIndex;
     let length = this.state.length;
     if (index < 1) {
@@ -116,7 +111,6 @@ class LogTableContainer extends React.Component {
     } else {
       index--;
     }
-    console.log("index: " + index);
     this.setState({
       activeIndex: index,
     });
@@ -130,7 +124,6 @@ class LogTableContainer extends React.Component {
   }
 
   goToNextTable() {
-    console.log("next");
     let index = this.state.activeIndex;
     let length = this.state.length;
     if (index === length - 1) {
@@ -138,7 +131,6 @@ class LogTableContainer extends React.Component {
     } else {
       index++;
     }
-    console.log("index: " + index);
     this.setState({
       activeIndex: index,
     });
@@ -152,8 +144,6 @@ class LogTableContainer extends React.Component {
   }
 
   render() {
-    console.log("infos");
-    console.log(this.state.infos);
     return (
       <div className="ui raised LogTableContainer">
         <Segment>

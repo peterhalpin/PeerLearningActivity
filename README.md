@@ -97,9 +97,23 @@ We'd like to thank Perter Halpin for coming up with some a great project idea an
 ### Stuctures of Code
 The entry point is `App.js` in  `./src`. Anything else can be found in `./src/components/*`. All the components follow the naming convention that inside `./src/components/MyComponent/`, we can find 3 files for most components (except Map) `MyComponent.js`, which is the main JS file, `MyComponent.css`, which is the css file, and `MyComponent.test.js`, which is the test file.    
 
-### Layout of Web UI
-The Layout of the Web UI can be changed by modifying the CSS file of each components. The CSS files are located inside the folder of each components.  
+
+### Setting 
+#### Google Form 
+We use an iFrame to support the google form plug in. The file to configure is inside `QaPanel/QaPanel.js` .          
+
+#### Log Tables
+To change the number of log tables, change the settings in `LogTableContainer/LogTableContainer.js`.     
+
+#### Color Scheme of Map
+To change the color scheme of the map, change settings in `Map/layerColor.js`.    
+
+#### Layout of Web UI
+The Layout of the Web UI can be changed by modifying the CSS file of each components. The CSS files are located inside the folder of each components.     
 
 
-
-
+## Things to transfer to Peter
+- Netlify    
+- Glitch 
+- Google form 
+- Mapbox 

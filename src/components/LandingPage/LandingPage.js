@@ -33,8 +33,4 @@ function LandingPage(props) {
   );
 }
 
-LandingPage.propTypes = {};
-
-LandingPage.defaultProps = {};
-
 export default LandingPage;

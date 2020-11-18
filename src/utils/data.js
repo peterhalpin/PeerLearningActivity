@@ -56,14 +56,12 @@ export const getDateObject = function () {
 };
 
 export const getMinDate = function () {
-  //TODO: store this in the object
   return getDateObject().reduce(function (prev, curr) {
     return prev.date < curr.date ? prev : curr;
   });
 };
 
 export const getMaxDate = function () {
-  //TODO: store this in the object
   return getDateObject().reduce(function (prev, curr) {
     return prev.date > curr.date ? prev : curr;
   });
@@ -72,7 +70,6 @@ export const getMaxDate = function () {
 export const getDateRange = function () {
   let min = getMinDate();
   let max = getMaxDate();
-  console.log(min, max);
   const diffTime = Math.abs(max.date.getTime() - min.date.getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
@@ -91,9 +88,6 @@ export const mapIntToDate = function (int) {
 };
 
 export const getDefaultDateInt = function () {
-  console.log(getDateRange());
-  console.log(Math.floor(getDateRange() / 2));
-  console.log(mapIntToDate(75));
   return Math.floor(getDateRange() / 2);
 };
 
