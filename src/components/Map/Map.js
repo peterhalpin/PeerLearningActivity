@@ -1,39 +1,45 @@
-import React from 'react';
-import mapboxgl from 'mapbox-gl';
-import './Map.css';
-import { dataCollect } from './us-states.js';
-import { MAPBOX_TOKEN } from './tokens.js';
-import { layerColors } from './layerColors.js';
-import { getHeadings, renderData, loadDataIntoGeoJSON, mapIntToDate} from '../../utils/data.js';
+import React from "react";
+import mapboxgl from "mapbox-gl";
+import "./Map.css";
+import { dataCollect } from "./us-states.js";
+import { MAPBOX_TOKEN } from "./tokens.js";
+import { layerColors } from "./layerColors.js";
+import {
+  getHeadings,
+  renderData,
+  loadDataIntoGeoJSON,
+  mapIntToDate,
+} from "../../utils/data.js";
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
 let enumDataLayerType;
-let newPromise = new Promise(function(resolve) {
+let newPromise = new Promise(function (resolve) {
   resolve(renderData());
-})
+});
 
-
-const setEnum = function(){
-  let dataLayerTypes = {}
+const setEnum = function () {
+  let dataLayerTypes = {};
   let headings = getHeadings();
-  headings.forEach(curr => {
-      const enumValue = curr;
-      dataLayerTypes = {...dataLayerTypes, [enumValue]: {name: curr, layerId: curr}};
+  headings.forEach((curr) => {
+    const enumValue = curr;
+    dataLayerTypes = {
+      ...dataLayerTypes,
+      [enumValue]: { name: curr, layerId: curr },
+    };
   });
-  enumDataLayerType = {...dataLayerTypes}; //TODO: replace this weith dataLayerTypes everywhere since it's no longer enum
-}
+  enumDataLayerType = { ...dataLayerTypes };
+};
 
 newPromise.then(setEnum).then(loadDataIntoGeoJSON);
 
 class Map extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       lat: 35.9,
       lng: -79.1,
-      zoom: 3
+      zoom: 3,
     };
     this.map = null;
     // the state that mouse is on right now
@@ -43,7 +49,7 @@ class Map extends React.Component {
     // restrict user inside this region of the map
     this.bounds = [
       [-179, -5.91619], // Southwest coordinates
-      [-20.96466, 75.3577635769] // Northeast coordinates
+      [-20.96466, 75.3577635769], // Northeast coordinates
     ];
     this.initDataLayer = this.initDataLayer.bind(this);
     this.switchToLayer = this.switchToLayer.bind(this);
@@ -51,64 +57,66 @@ class Map extends React.Component {
     this.finishLoadingMapStyle = false;
   }
 
-  initDataLayer(dataId, layerType, visible) { 
+  initDataLayer(dataId, layerType, visible) {
     const layerId = layerType.layerId;
-    const layerColor = layerColors['mapExample'];
+    const layerColor = layerColors["mapExample"];
     // const layerColor = layerColors[layerType.name];
 
     // fill states with different colors based on their corresponding data in geojson file
     // fill states with different opacity based on whether the mouse is hovering or not
+    // TODO: change the numbers of color -- should match
     this.map.addLayer({
       id: layerId,
       source: dataId,
-      type: 'fill',
+      type: "fill",
       layout: {
-        'visibility': (visible ? 'visible' : 'none')
+        visibility: visible ? "visible" : "none",
       },
       paint: {
-        'fill-color': [
-          'interpolate',
-          ['linear'],
-          ['number', ['get', 'cases']],
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["number", ["get", "cases"]],
           0,
-          layerColor['0'],
+          layerColor["0"],
           500,
-          layerColor['10'],
+          layerColor["10"],
           2000,
-          layerColor['20'],
+          layerColor["20"],
           5000,
-          layerColor['50'],
+          layerColor["50"],
           20000,
-          layerColor['100'],
+          layerColor["100"],
           50000,
-          layerColor['200'],
+          layerColor["200"],
           80000,
-          layerColor['500'],
+          layerColor["500"],
           100000,
-          layerColor['1000'],
+          layerColor["1000"],
         ],
-        'fill-opacity': [
+        "fill-opacity": [
           // if the state is either hovered or selected, highlight the state; otherwise cancel the highlight
-          'case',
+          "case",
           [
-            'any',
-            ['boolean', ['feature-state', 'hover'], false],
-            ['boolean', ['feature-state', 'select'], false],
-            false
+            "any",
+            ["boolean", ["feature-state", "hover"], false],
+            ["boolean", ["feature-state", "select"], false],
+            false,
           ],
           0.85,
-          0.5
-        ]
-      }
-
+          0.5,
+        ],
+      },
     });
-    this.map.setFilter(layerId, ['==', ['string', ['get', 'date']], mapIntToDate(this.props.selectedDate)]);
-    console.log(layerId);
+    this.map.setFilter(layerId, [
+      "==",
+      ["string", ["get", "date"]],
+      mapIntToDate(this.props.selectedDate),
+    ]);
     this.finishLoadingMapStyle = true;
 
-
     // when hovering, turn on the hover state for current map feature and turn off the hover state for previous map feature (if any)
-    this.map.on('mousemove', layerId, (e) => {
+    this.map.on("mousemove", layerId, (e) => {
       if (e.features.length > 0) {
         if (this.hoveredStateId) {
           this.map.setFeatureState(
@@ -125,7 +133,7 @@ class Map extends React.Component {
     });
 
     // when selecting, turn on the hover state for current map feature and turn off the select state for previous map feature (if any)
-    this.map.on('click', layerId, (e) => {
+    this.map.on("click", layerId, (e) => {
       if (e.features.length > 0) {
         if (this.selectedStateId) {
           this.map.setFeatureState(
@@ -140,14 +148,16 @@ class Map extends React.Component {
         );
 
         if (this.props.onClickMap) {
-          console.log(e.features[0].properties.cases)
-          this.props.onClickMap(e.features[0].properties.name, e.features[0].properties.cases);
+          this.props.onClickMap(
+            e.features[0].properties.name,
+            e.features[0].properties.cases
+          );
         }
       }
     });
 
     // when mouse leaveing the states map, turn off the hover state for current map feature
-    this.map.on('mouseleave', layerId, () => {
+    this.map.on("mouseleave", layerId, () => {
       if (this.hoveredStateId) {
         this.map.setFeatureState(
           { source: dataId, id: this.hoveredStateId },
@@ -156,16 +166,23 @@ class Map extends React.Component {
       }
       this.hoveredStateId = null;
     });
-
   }
 
   switchToLayer(layerType) {
     for (const type in enumDataLayerType) {
       if (enumDataLayerType[type].layerId === layerType) {
         this.currentDataLayer = enumDataLayerType[type];
-        this.map.setLayoutProperty(enumDataLayerType[type].layerId, 'visibility', 'visible');
+        this.map.setLayoutProperty(
+          enumDataLayerType[type].layerId,
+          "visibility",
+          "visible"
+        );
       } else {
-        this.map.setLayoutProperty(enumDataLayerType[type].layerId, 'visibility', 'none');
+        this.map.setLayoutProperty(
+          enumDataLayerType[type].layerId,
+          "visibility",
+          "none"
+        );
       }
     }
   }
@@ -173,59 +190,61 @@ class Map extends React.Component {
   componentDidMount() {
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: "mapbox://styles/mapbox/streets-v11",
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
-      maxBounds: this.bounds
+      maxBounds: this.bounds,
     });
 
-    this.map.on('load', () => {
-      Object.keys(enumDataLayerType).forEach(dataType => {
-        const dataId = 'states_data_' + dataType;
+    this.map.on("load", () => {
+      Object.keys(enumDataLayerType).forEach((dataType) => {
+        const dataId = "states_data_" + dataType;
         // attach geojson data to the map
         this.map.addSource(dataId, {
-          type: 'geojson',
-          data: dataCollect[dataType]
-        })
+          type: "geojson",
+          data: dataCollect[dataType],
+        });
 
         this.initDataLayer(dataId, enumDataLayerType[dataType], false);
-
-      }); 
+      });
       this.switchToLayer(this.props.selectedDataType);
-      
+
       // add dashed-line borders to states
       this.map.addLayer({
-        id: 'states-borders',
-        type: 'line',
-        source: 'states_data_' + this.props.selectedDataType,
+        id: "states-borders",
+        type: "line",
+        source: "states_data_" + this.props.selectedDataType,
         layout: {},
         paint: {
-          'line-color': '#FFFFFF',
-          'line-width': 2,
-          'line-dasharray': [3, 3]
-        }
+          "line-color": "#FFFFFF",
+          "line-width": 2,
+          "line-dasharray": [3, 3],
+        },
       });
     });
-
-
   }
   componentDidUpdate(prevProps) {
-    if ((prevProps.selectedDate !== this.props.selectedDate) && this.finishLoadingMapStyle) {
-      // console.log(this.props.selectedDate);
-      Object.keys(enumDataLayerType).forEach(dataType => {
-        this.map.setFilter(dataType, ['==', ['string', ['get', 'date']], mapIntToDate(this.props.selectedDate)]);
-      })
+    if (
+      prevProps.selectedDate !== this.props.selectedDate &&
+      this.finishLoadingMapStyle
+    ) {
+      Object.keys(enumDataLayerType).forEach((dataType) => {
+        this.map.setFilter(dataType, [
+          "==",
+          ["string", ["get", "date"]],
+          mapIntToDate(this.props.selectedDate),
+        ]);
+      });
     }
   }
 
   render() {
     return (
       <div data-testid="Map">
-        <div ref={el => this.mapContainer = el} className="mapContainer" />
+        <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
       </div>
-    )
+    );
   }
-
 }
 
 export default Map;
