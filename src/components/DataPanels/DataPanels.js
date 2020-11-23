@@ -13,7 +13,7 @@ class DataPanels extends React.Component {
           changeSelectedDate={this.props.changeSelectedDate}
           dateRange={this.props.dateRange}
         />
-        <RadioButtonPanel changeDataType={this.props.changeDataType} />
+        <RadioButtonPanel changeDataType={this.props.changeDataType} selectedDataType={this.props.selectedDataType} />
         <DataDisplay
           selectedDate={this.props.selectedDate}
           currentData={this.props.currentData}

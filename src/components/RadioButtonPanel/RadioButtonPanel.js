@@ -13,7 +13,7 @@ function RadioButton(headings, checkedButton, handleChange) {
             type="radio"
             name={"button"}
             value={currHeading}
-            checked={checkedButton === currHeading}
+            checked={Array.isArray(checkedButton) ? checkedButton[0] === currHeading : checkedButton === currHeading}
             onChange={handleChange}
           />
           <label>
@@ -30,19 +30,11 @@ class RadioButtonPanel extends React.Component {
   constructor(props) {
     super(props);
     this.headings = getStyledHeadings();
-    this.state = {
-      checkedButton: getDefaultHeading(),
-    };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ checkedButton: event.target.value });
     this.props.changeDataType(event.target.value);
-  }
-
-  getCheckedButton() {
-    return this.state.checkedButton;
   }
 
   render() {
@@ -58,7 +50,7 @@ class RadioButtonPanel extends React.Component {
           <div className="grouped fields">
             {RadioButton(
               this.headings,
-              this.state.checkedButton,
+              this.props.selectedDataType,
               this.handleChange
             )}
           </div>

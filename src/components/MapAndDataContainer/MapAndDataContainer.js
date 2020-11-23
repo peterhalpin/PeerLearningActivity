@@ -80,6 +80,15 @@ class MapAndDataContainer extends React.Component {
     this.setData("selectedDataType", type, this.refreshData);
     const destylizedValue = type.replace(" ", "_");
     this.updateLayer(destylizedValue);
+    if (!this.props.testEnv) {
+      // sync togetherJS
+      if (window.TogetherJS.running) {
+        window.TogetherJS.send({
+          type: "layerUpdate",
+          value: destylizedValue
+        });
+      }
+    }
   }
 
   selectStateWithData(stateName, data) {
@@ -105,6 +114,10 @@ class MapAndDataContainer extends React.Component {
         const type = msg.dataType;
         const value = msg.dataValue;
         this.setState({ [type]: [value] });
+      });
+      window.TogetherJS.hub.on("layerUpdate", (msg) => {
+        if (!msg.sameUrl) return;
+        this.updateLayer(msg.value);
       });
     }
   }
