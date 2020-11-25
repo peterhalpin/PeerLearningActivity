@@ -3,7 +3,7 @@
 * Library: TogetherJS
 * Language: JavaScript
 * CSS framework: Semantic UI
-* Hosting: netlify + faunaDB
+* Hosting: netlify
 * PDR: 1st git style to collaborate 
 
 ## Decision: Languages – HTML, CSS, JavaScript
@@ -96,11 +96,11 @@ We pick option 2, which is using a CSS framework designed for React, and here we
 
  
 
-## Decision: Netlify + FaunaDB
+## Decision: Netlify
 
 * 0 Summary
 
-In order to host a front end dynamic web application, with the ability to connect to a database effectively, we decided to use Netlify with FaunaDB. 
+In order to host a front end dynamic web application, with the ability to connect to a database effectively, we decided to use Netlify. 
 
 * 1 Problem
 

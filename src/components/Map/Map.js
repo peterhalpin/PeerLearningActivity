@@ -64,7 +64,6 @@ class Map extends React.Component {
 
     // fill states with different colors based on their corresponding data in geojson file
     // fill states with different opacity based on whether the mouse is hovering or not
-    // TODO: change the numbers of color -- should match
     this.map.addLayer({
       id: layerId,
       source: dataId,
@@ -80,19 +79,19 @@ class Map extends React.Component {
           0,
           layerColor["0"],
           500,
-          layerColor["10"],
-          2000,
-          layerColor["20"],
-          5000,
-          layerColor["50"],
-          20000,
-          layerColor["100"],
-          50000,
-          layerColor["200"],
-          80000,
           layerColor["500"],
+          2000,
+          layerColor["2000"],
+          5000,
+          layerColor["5000"],
+          20000,
+          layerColor["20000"],
+          50000,
+          layerColor["50000"],
+          80000,
+          layerColor["80000"],
           100000,
-          layerColor["1000"],
+          layerColor["100000"],
         ],
         "fill-opacity": [
           // if the state is either hovered or selected, highlight the state; otherwise cancel the highlight
