@@ -56,6 +56,7 @@ class MapAndDataContainer extends React.Component {
           .toString()
           .replace(" ", "_");
         let dataForType = dataForState[destylizedType];
+
         if (dataForType) {
           let dataForDate = dataForType[mapIntToDate(this.state.selectedDate)];
           this.changeCurrentData(dataForDate);
