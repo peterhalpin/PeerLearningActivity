@@ -11,9 +11,6 @@
 # production
 /build
 
-# secrets
-/src/components/Map/tokens.js
-
 # misc
 .DS_Store
 .env.local
@@ -25,5 +22,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 debug.log
-.gitsecret/keys/random_seed
 !*.secret
