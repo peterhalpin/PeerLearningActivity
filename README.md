@@ -111,6 +111,10 @@ To change the color scheme of the map, change settings in `Map/layerColor.js`.
 #### Layout of Web UI
 The Layout of the Web UI can be changed by modifying the CSS file of each components. The CSS files are located inside the folder of each components.     
 
+#### Uploading new data
+To upload new data, add a file to the folder `public/data`. Some naming conventions must be followed: 
+* If a heading includes more than one word, the words should be concatenated with an underscore. For example, the heading Total Tests should be `total_deaths`.
+* The date should be written in the form YYYY/MM/DD. For example, 2020-02-09. 
 
 ## Things to transfer to Peter
 - Netlify    
