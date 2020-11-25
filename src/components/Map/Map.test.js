@@ -3,9 +3,6 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Map from "./Map";
 
-//jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
-//   Map: () => ({})
-//}));
 jest.mock("mapbox-gl/dist/mapbox-gl", () => ({
   GeolocateControl: jest.fn(),
   Map: jest.fn(() => ({
