@@ -52,12 +52,18 @@ class MapAndDataContainer extends React.Component {
     if (organizedObject) {
       let dataForState = organizedObject[this.state.selectedState];
       if (dataForState) {
+        console.log(dataForState);
         let destylizedType = this.state.selectedDataType
           .toString()
           .replace(" ", "_");
         let dataForType = dataForState[destylizedType];
+        console.log(dataForType);
+
         if (dataForType) {
+          console.log('selectedDate:', this.state.selectedDate);
+          console.log('selecteddate int: ', mapIntToDate(this.state.selectedDate));
           let dataForDate = dataForType[mapIntToDate(this.state.selectedDate)];
+          console.log(dataForDate);
           this.changeCurrentData(dataForDate);
         }
       }

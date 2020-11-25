@@ -97,9 +97,13 @@ export const loadDataIntoGeoJSON = function () {
     const stateName = entry.location;
     const dateString = entry.date;
     const dateSplit = dateString.split("-");
-    const dateObj = new Date(dateSplit[0], dateSplit[1], dateSplit[2]);
+    const dateObj = new Date(
+      parseInt(dateSplit[0]),
+      parseInt(dateSplit[1]) - 1,
+      parseInt(dateSplit[2])
+    );
     const currentMonth = dateObj.getMonth() + 1;
-    const currentDate = dateObj.getDate() + 1;
+    const currentDate = dateObj.getDate();
     const currentYear = dateObj.getFullYear();
     const date = currentMonth + "/" + currentDate + "/" + currentYear;
     const deaths = Math.floor(parseFloat(entry.deaths));
