@@ -49,7 +49,8 @@ Technologies used:
 * TogetherJS
 * JavaScript
 * Semantic UI
-* Netlify + FaunaDB
+* Netlify 
+* TogtherJS Hub
 
 The ADRs can be found in ADRs.md
 
